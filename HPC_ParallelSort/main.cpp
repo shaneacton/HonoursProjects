@@ -9,22 +9,25 @@ using namespace std;
 
 
 long arrayLengths =10000000;
-
+void testSequential();
+void testOpenMP();
+void testMPI();
 
 int main( int argc, const char* argv[] )
 {
-	// Prints each argument on the command line.
-	for( int i = 0; i < argc; i++ )
-	{
-		printf( "arg %d: %s\n", i, argv[i] );
-	}
+	testSequential();
+    
 
+}
+
+void testSequential(){
 	SequentialSort::genArray(arrayLengths);
 	double start_time = omp_get_wtime();
 	SequentialSort::sortArray(0,arrayLengths);
 	double time = omp_get_wtime() - start_time;
-	SequentialSort::printArray();
-    printf("sorted:%d\n" , ArrayUtils::isSorted(SequentialSort::array, SequentialSort::numElements));
+	//SequentialSort::printArray();
+
+	printf("sorted:%d | " , ArrayUtils::isSorted(SequentialSort::array, SequentialSort::numElements));
     printf("sequential time:%f\n",time);
 
 }
