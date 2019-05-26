@@ -15,19 +15,22 @@
 namespace SequentialSort {
 
   // private members
-  int numElements;
+  long numElements;
   int* array;
 
-  void genArray(int nElements){
+  void genArray(long nElements){
     numElements = nElements;
-    printf("generating array of length %d\n", numElements);
+    //printf("generating array of length %ld\n", numElements);
     array = ArrayUtils::generateArray(nElements);
-    ArrayUtils::printArray(array, numElements);
+    //ArrayUtils::printArray(array, numElements);
+  
+    //printf("sorted:%d\n" , ArrayUtils::isSorted(array, numElements));
   }
 
   void sortArray(int start,int end){
     int length = end-start;
     if(length<= 1){
+      //printf("reached base, start:%d end:%d\n",start,end);
       return;
     }
 
@@ -35,26 +38,32 @@ namespace SequentialSort {
     int* pivotValue = &array[pivot];
     //*(array + pivot)
 
-    int belowPivot = -1;
-    for (int i = 0; i < length; ++i)
+    //printf("pivot val:%d\n",*pivotValue);
+
+    int belowPivot = start -1;
+    for (long i = start; i < start + length; ++i)
     {
         int* currentValue = &array[i];
         
         if(*currentValue < *pivotValue){
+          //printf("currentval:%d less than pivot value:%d\n", *currentValue, *pivotValue);
           belowPivot++;   
           if(i>belowPivot){
-            std::swap(array[belowPivot + 1], array[i]);
+
+            std::swap(array[belowPivot], array[i]);
           }     
           continue;
         }
 
         //current value more than pivot value
-
-
     }
 
-    sortArray(start,pivot);
-    sortArray(pivot,end);
+    std::swap(array[belowPivot+1], array[pivot]);
+
+    //printf("start:%d mid:%d end:%d\n",start,(belowPivot +1),end);
+
+    sortArray(start,belowPivot+1);
+    sortArray(belowPivot+2,end);
   }
 
   void printArray(){
