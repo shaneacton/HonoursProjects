@@ -40,7 +40,7 @@ namespace OpenMPSort {
     //#pragma omp parallel num_threads(numThreads)
     {
 
-      #pragma omp single// nowait
+      //#pragma omp single// nowait
     	{
     		sortArrayInternal(0,length, 0, "");	
     	}
@@ -100,13 +100,10 @@ namespace OpenMPSort {
       printf("%s branching from thread %d at level %d - creating two new threads. current thread terminating\n" ,pathID.c_str(), omp_get_thread_num(), level);
 
       #pragma omp task 
-      {
-        std::string lPath =(pathID + "L");
-        sortArrayInternal(start,belowPivot+1, level+1, lPath);}
+      {sortArrayInternal(start,belowPivot+1, level+1, (pathID + "L"));}
+
       //#pragma omp task 
-      {
-        std::string rPath = (pathID + "R");
-        sortArrayInternal(belowPivot+2,end, level + 1, rPath);}
+      {sortArrayInternal(belowPivot+2,end, level + 1, (pathID + "R"));}
     }
 
     

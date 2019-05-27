@@ -13,12 +13,13 @@ long arrayLengths =128;
 void testSequential();
 void testOpenMP();
 void testMPI();
+void testParallelism();
 
 int main( int argc, const char* argv[] )
 {
 	testSequential();
     testOpenMP();
-
+	
 }
 
 void testSequential(){
@@ -41,4 +42,32 @@ void testOpenMP(){
 
 	printf("sorted:%d | " , ArrayUtils::isSorted(OpenMPSort::array, OpenMPSort::numElements));
     printf("openMP time:%f\n",time);
+}
+
+void testParallelism(){
+	#pragma omp parallel 
+    { 
+
+
+	     #pragma omp single 
+	     { 
+			printf("A "); 
+
+			#pragma omp task 
+			{
+			printf("race %d",omp_get_thread_num());
+			printf("race %d",omp_get_thread_num());
+			printf("race %d",omp_get_thread_num());
+			printf("race %d",omp_get_thread_num());
+			} 
+			#pragma omp task 
+			{
+			printf("car %d",omp_get_thread_num());
+			printf("car %d",omp_get_thread_num());
+			printf("car %d",omp_get_thread_num());
+			printf("car %d",omp_get_thread_num());
+			} 
+		 } 
+	} // End of parallel region 
+	printf("\n"); 
 }
