@@ -14,7 +14,6 @@
 
 namespace SequentialSort {
 
-  // private members
   long numElements;
   int* array;
 
@@ -36,7 +35,6 @@ namespace SequentialSort {
 
     int pivot = end-1;
     int* pivotValue = &array[pivot];
-    //*(array + pivot)
 
     //printf("pivot val:%d\n",*pivotValue);
 
@@ -64,10 +62,6 @@ namespace SequentialSort {
 
     sortArray(start,belowPivot+1);
     sortArray(belowPivot+2,end);
-  }
-
-  void printArray(){
-    ArrayUtils::printArray(array, numElements);
   }
   
 };

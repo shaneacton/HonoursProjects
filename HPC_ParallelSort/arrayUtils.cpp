@@ -1,4 +1,7 @@
 
+#ifndef ARRAYUTILS_CPP
+#define ARRAYUTILS_CPP
+
 #include <string>
 #include <sstream>
 
@@ -20,7 +23,7 @@ namespace ArrayUtils {
 			arr[i]=rand() % maxValue + 1;
 		}
 
-		printf("creating new array of length %ld and populating it\n",length);
+		//printf("creating new array of length %ld and populating it\n",length);
 
 		return arr;
 	}
@@ -49,3 +52,5 @@ namespace ArrayUtils {
 	}
 
 }
+
+#endif
