@@ -40,7 +40,7 @@ namespace OpenMPSort {
     //#pragma omp parallel num_threads(numThreads)
     {
 
-      //#pragma omp single// nowait
+        #pragma omp single// nowait
     	{
     		sortArrayInternal(0,length, 0, "");	
     	}
