@@ -13,7 +13,7 @@
 #SBATCH —partition=curie
 
 # The line below means you need 1 worker node and a total of 2 cores
-#SBATCH —nodes=2 —ntasks=4
+#SBATCH —nodes=1 —ntasks=4
 #  To evenly split over two nodes use: --ntasks-per-node=2
 
 # The line below indicates the wall time your job will need, 10 hours for example. NB, this is a mandatory directive!
@@ -21,17 +21,16 @@
 #SBATCH --time=10:00
 
 # The line below means your job will be canceled if it consumes more than 4GB of RAM per requested core. Max 9000.
-#SBATCH --mem-per-cpu=4000
 
 # A sensible name for your job, try to keep it short
-#SBATCH --job-name="MyJob"
+#SBATCH --job-name="ShaneHPC"
 
 #Modify the lines below for email alerts. Valid type values are NONE, BEGIN, END, FAIL, REQUEUE, ALL 
-#SBATCH --mail-user=michelle.kuttel@uct.ac.za
-#SBATCH --mail-type=BEGIN,END,FAIL
+#SBATCH --mail-user=ACTSHA001@myuct.ac.za
+#SBATCH --mail-type=NONE
 
 # NB, for more information read https://computing.llnl.gov/linux/slurm/sbatch.html
 
 # Use module to gain easy access to software, typing module avail lists all packages.
-# Example:
-# module load python/anaconda-python-2.7
+make
+./main
