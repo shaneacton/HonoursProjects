@@ -19,6 +19,8 @@ namespace OpenMPSort {
   int* array;
   int numThreads;
 
+  std::string parallelMethod = "tasks";
+
   void sortArrayInternal(int start,int end,int level, std::string pathID);
 
   void genArray(long nElements,int expNo){
@@ -36,28 +38,46 @@ namespace OpenMPSort {
     numThreads= omp_get_max_threads(); 
     printf("omp sorting using %d threads\n",numThreads);
     
-    #pragma omp parallel
-    //#pragma omp parallel num_threads(numThreads)
-    {
-
-      #pragma omp single nowait
-    	{
-    	    if(!regularIntervals){
-    		    sortArrayInternal(0,length, 0, "");
-    	    }else{
-    	        int interval = length/numThreads;
-                for (int i = 0; i < numThreads; ++i) {
-                    if(i == numThreads -1) {
-                        { sortArrayInternal(0, length, 0, "REG("+std::to_string(i)+")"); }
-                    }else{
-                        #pragma omp task
-                        { sortArrayInternal(interval*i, interval*(i+1), -1, "REG("+std::to_string(i)+")"); }
-                    }
-                }
-    	    }
-    	}
+    if(parallelMethod == "tasks"){
+      #pragma omp parallel
+      {
+        #pragma omp single nowait
+        {
+            if(!regularIntervals){
+              sortArrayInternal(0,length, 0, "");
+            }else{
+                int interval = length/numThreads;
+                  for (int i = 0; i < numThreads; ++i) {
+                      if(i == numThreads -1) {
+                          { sortArrayInternal(0, length, 0, "REG("+std::to_string(i)+")"); }
+                      }else{
+                          #pragma omp task
+                          { sortArrayInternal(interval*i, interval*(i+1), -1, "REG("+std::to_string(i)+")"); }
+                      }
+                  }
+            }
+        }
+      }
+    }else{
+            if(!regularIntervals){
+              sortArrayInternal(0,length, 0, "");
+            }else{
+                int interval = length/numThreads;
+                  for (int i = 0; i < numThreads; ++i) {
+                      if(i == numThreads -1) {
+                          { sortArrayInternal(0, length, 0, "REG("+std::to_string(i)+")"); }
+                      }else{
+                          #pragma omp task
+                          { sortArrayInternal(interval*i, interval*(i+1), -1, "REG("+std::to_string(i)+")"); }
+                      }
+                  }
+            }
     }
   }
+
+    
+    
+  
 
   void sortArrayInternal(int start,int end,int level, std::string pathID){
     //printf("%s, %d\n", pathID.c_str(), omp_get_thread_num());
@@ -112,15 +132,31 @@ namespace OpenMPSort {
     }else{
       //can still branch into new threads
       //printf("TU:%d",threadsUsed);
-      printf("%s branching from thread %d at level %d - creating new thread\n" ,pathID.c_str(), omp_get_thread_num(), level);
+      
 
-      #pragma omp task 
-      {sortArrayInternal(start,belowPivot+1, level+1, (pathID + "L"));}
+      if(parallelMethod == "tasks"){
+        printf("%s branching using tasks from thread %d at level %d - creating new thread\n" ,pathID.c_str(), omp_get_thread_num(), level);
 
-      //#pragma omp task 
-      {sortArrayInternal(belowPivot+2,end, level + 1, (pathID + "R"));}
+        #pragma omp  task
+        {sortArrayInternal(start,belowPivot+1, level+1, (pathID + "L"));}
 
-      printf("finished branch %s\n", pathID.c_str());
+        #pragma omp  task
+        {sortArrayInternal(belowPivot+2,end, level + 1, (pathID + "R"));}
+      }else{
+        printf("%s branching using sections from thread %d at level %d - creating new thread\n" ,pathID.c_str(), omp_get_thread_num(), level);
+
+        #pragma omp parallel sections
+        {
+          #pragma omp  section
+          {sortArrayInternal(start,belowPivot+1, level+1, (pathID + "L"));}
+
+          #pragma omp  section
+          {sortArrayInternal(belowPivot+2,end, level + 1, (pathID + "R"));}
+        }
+
+      }
+
+      //printf("finished branch %s\n", pathID.c_str());
     }
 
     

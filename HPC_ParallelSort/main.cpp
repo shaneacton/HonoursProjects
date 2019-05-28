@@ -9,8 +9,8 @@ using namespace std;
 #include "openMPSort.h"
 
 
-long arrayLengths =50000000;
-int experiments = 3;
+long arrayLengths =20000000;
+int experiments = 5;
 
 void testSequential();
 void testOpenMP(bool regular);
@@ -21,12 +21,17 @@ int main( int argc, const char* argv[] )
 {
 	testSequential();
     testOpenMP(false);
+    OpenMPSort::parallelMethod= "sections";
+    testOpenMP(false);
+
     //testOpenMP(true);
 	//testParallelism();
 }
 
 void testSequential(){
     printf("testing sequential\n");
+	double timeTotal = 0;
+
     for (int i = 0; i < experiments; ++i){
 
 	    SequentialSort::genArray(arrayLengths,i);
@@ -38,11 +43,14 @@ void testSequential(){
 		printf("sorted:%d | " , ArrayUtils::isSorted(SequentialSort::array, SequentialSort::numElements));
 	    printf("sequential time:%f\n",time);
 	}
+	printf("averagetime:%f",(timeTotal/experiments));
 
 }
 
 void testOpenMP(bool regular){
     printf("testing openmp | reg: %d\n", regular);
+
+    double timeTotal = 0;
 
     for (int i = 0; i < experiments; ++i)
     {
@@ -50,6 +58,7 @@ void testOpenMP(bool regular){
 		double start_time = omp_get_wtime();
 		OpenMPSort::sortArray(arrayLengths, regular);
 		double time = omp_get_wtime() - start_time;
+		timeTotal+=time;
 		printf("sorted:%d | " , ArrayUtils::isSorted(OpenMPSort::array, OpenMPSort::numElements));
 		if(!regular){
 	        printf("regular openMP time:%f\n",time);
@@ -57,6 +66,8 @@ void testOpenMP(bool regular){
 	        printf("openMP time:%f\n",time);
 	    }    
 	}
+
+	printf("averagetime:%f",(timeTotal/experiments));
 	
 	
 }
