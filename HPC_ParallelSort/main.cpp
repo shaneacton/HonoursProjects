@@ -11,14 +11,14 @@ using namespace std;
 
 long arrayLengths =80;
 void testSequential();
-void testOpenMP();
+void testOpenMP(bool regular);
 void testMPI();
 void testParallelism();
 
 int main( int argc, const char* argv[] )
 {
 	testSequential();
-    testOpenMP();
+    testOpenMP(false);
     testOpenMP(true);
 	//testParallelism();
 }
@@ -36,7 +36,7 @@ void testSequential(){
 
 }
 
-void testOpenMP(bool regular = false){
+void testOpenMP(bool regular){
     printf("testing openmp | reg %d", regular);
 	OpenMPSort::genArray(arrayLengths);
 	double start_time = omp_get_wtime();
