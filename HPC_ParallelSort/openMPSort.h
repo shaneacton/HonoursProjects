@@ -40,7 +40,7 @@ namespace OpenMPSort {
     //#pragma omp parallel num_threads(numThreads)
     {
 
-        #pragma omp single nowait
+      #pragma omp single nowait
     	{
     	    if(!regularIntervals){
     		    sortArrayInternal(0,length, 0, "");
@@ -61,7 +61,7 @@ namespace OpenMPSort {
   }
 
   void sortArrayInternal(int start,int end,int level, std::string pathID){
-    printf("%s, %d\n", pathID.c_str(), omp_get_thread_num());
+    //printf("%s, %d\n", pathID.c_str(), omp_get_thread_num());
   	int length = end-start;
     if(length<= 1){
       //printf("reached base, start:%d end:%d\n",start,end);
@@ -113,7 +113,7 @@ namespace OpenMPSort {
     }else{
       //can still branch into new threads
       //printf("TU:%d",threadsUsed);
-      printf("%s branching from thread %d at level %d - creating two new threads. current thread terminating\n" ,pathID.c_str(), omp_get_thread_num(), level);
+      printf("%s branching from thread %d at level %d - creating new thread\n" ,pathID.c_str(), omp_get_thread_num(), level);
 
       #pragma omp task 
       {sortArrayInternal(start,belowPivot+1, level+1, (pathID + "L"));}

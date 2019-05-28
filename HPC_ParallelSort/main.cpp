@@ -9,7 +9,7 @@ using namespace std;
 #include "openMPSort.h"
 
 
-long arrayLengths =80;
+long arrayLengths =50000000;
 void testSequential();
 void testOpenMP(bool regular);
 void testMPI();
@@ -19,12 +19,12 @@ int main( int argc, const char* argv[] )
 {
 	testSequential();
     testOpenMP(false);
-    testOpenMP(true);
+    //testOpenMP(true);
 	//testParallelism();
 }
 
 void testSequential(){
-    printf("testing sequential");
+    printf("testing sequential\n");
     SequentialSort::genArray(arrayLengths);
 	double start_time = omp_get_wtime();
 	SequentialSort::sortArray(0,arrayLengths);
@@ -37,7 +37,7 @@ void testSequential(){
 }
 
 void testOpenMP(bool regular){
-    printf("testing openmp | reg %d", regular);
+    printf("testing openmp | reg: %d\n", regular);
 	OpenMPSort::genArray(arrayLengths);
 	double start_time = omp_get_wtime();
 	OpenMPSort::sortArray(arrayLengths, regular);
