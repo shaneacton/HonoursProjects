@@ -47,7 +47,7 @@ void testOpenMP(){
 void testParallelism(){
 	#pragma omp parallel 
     { 
-        #pragma omp single no wait
+        #pragma omp single nowait
 	     { 
 			printf("A "); 
 
