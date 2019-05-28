@@ -32,7 +32,7 @@ namespace OpenMPSort {
 
 
 
-  void sortArray(int length){
+  void sortArray(int length, bool regularIntervals = false){
     numThreads= omp_get_max_threads(); 
     printf("omp sorting using %d threads\n",numThreads);
     
@@ -42,7 +42,19 @@ namespace OpenMPSort {
 
         #pragma omp single// nowait
     	{
-    		sortArrayInternal(0,length, 0, "");	
+    	    if(!regularIntervals){
+    		    sortArrayInternal(0,length, 0, "");
+    	    }else{
+    	        interval = length/numThreads;
+                for (int i = 0; i < numThreads; ++i) {
+                    if(i == numThreads -1) {
+                        { sortArrayInternal(0, length, 0, "REG("+std::to_string(i)+")"); }
+                    }else{
+                        #pragma omp task
+                        { sortArrayInternal(interval*i, interval*(i+1), -1, "REG("+std::to_string(i)+")"); }
+                    }
+                }
+    	    }
     	}
     }
 
@@ -54,6 +66,10 @@ namespace OpenMPSort {
     if(length<= 1){
       //printf("reached base, start:%d end:%d\n",start,end);
       return;
+    }
+
+    if(level < 0){
+        level --;
     }
 
     
@@ -89,7 +105,7 @@ namespace OpenMPSort {
     //level 2 uses 4 threads
     int threadsUsed = std::pow(2,level);
 
-    if(threadsUsed>=numThreads || level> 5){
+    if(threadsUsed>=numThreads || level> 5 || level < 0){
       //has expanded into the max threads available
       //printf("utilising all cores, switching to serial -reusing threads; level=%d; length=%d\n",level,length);
       sortArrayInternal(start,belowPivot+1, level+1, (pathID + "L"));
