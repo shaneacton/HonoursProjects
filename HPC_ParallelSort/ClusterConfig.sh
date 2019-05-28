@@ -7,13 +7,13 @@
 ######################################################################################################
 
 # The line below indicates which accounting group to log your job against - must be its
-#SBATCH —account=icts
+#SBATCH --account=icts
 
 # The line below selects the group of nodes you require - you will all run on curie
-#SBATCH —partition=curie
+#SBATCH --partition=curie
 
 # The line below means you need 1 worker node and a total of 2 cores
-#SBATCH —nodes=1 —ntasks=4
+#SBATCH --nodes=1 —ntasks=4
 #  To evenly split over two nodes use: --ntasks-per-node=2
 
 # The line below indicates the wall time your job will need, 10 hours for example. NB, this is a mandatory directive!
