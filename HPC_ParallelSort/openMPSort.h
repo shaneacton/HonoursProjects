@@ -21,10 +21,10 @@ namespace OpenMPSort {
 
   void sortArrayInternal(int start,int end,int level, std::string pathID);
 
-  void genArray(long nElements){
+  void genArray(long nElements,int expNo){
     numElements = nElements;
     //printf("generating array of length %ld\n", numElements);
-    array = ArrayUtils::generateArray(nElements);
+    array = ArrayUtils::generateArray(nElements, expNo);
     //ArrayUtils::printArray(array, numElements);
   
     //printf("sorted:%d\n" , ArrayUtils::isSorted(array, numElements));
@@ -57,7 +57,6 @@ namespace OpenMPSort {
     	    }
     	}
     }
-
   }
 
   void sortArrayInternal(int start,int end,int level, std::string pathID){
@@ -120,6 +119,8 @@ namespace OpenMPSort {
 
       //#pragma omp task 
       {sortArrayInternal(belowPivot+2,end, level + 1, (pathID + "R"));}
+
+      printf("finished branch %s\n", pathID.c_str());
     }
 
     

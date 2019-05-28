@@ -17,10 +17,10 @@ namespace SequentialSort {
   long numElements;
   int* array;
 
-  void genArray(long nElements){
+  void genArray(long nElements,int expNo){
     numElements = nElements;
     //printf("generating array of length %ld\n", numElements);
-    array = ArrayUtils::generateArray(nElements);
+    array = ArrayUtils::generateArray(nElements, expNo);
     //ArrayUtils::printArray(array, numElements);
   
     //printf("sorted:%d\n" , ArrayUtils::isSorted(array, numElements));

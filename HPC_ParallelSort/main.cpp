@@ -10,6 +10,8 @@ using namespace std;
 
 
 long arrayLengths =50000000;
+int experiments = 3;
+
 void testSequential();
 void testOpenMP(bool regular);
 void testMPI();
@@ -25,30 +27,38 @@ int main( int argc, const char* argv[] )
 
 void testSequential(){
     printf("testing sequential\n");
-    SequentialSort::genArray(arrayLengths);
-	double start_time = omp_get_wtime();
-	SequentialSort::sortArray(0,arrayLengths);
-	double time = omp_get_wtime() - start_time;
-	
+    for (int i = 0; i < experiments; ++i){
 
-	printf("sorted:%d | " , ArrayUtils::isSorted(SequentialSort::array, SequentialSort::numElements));
-    printf("sequential time:%f\n",time);
+	    SequentialSort::genArray(arrayLengths,i);
+		double start_time = omp_get_wtime();
+		SequentialSort::sortArray(0,arrayLengths);
+		double time = omp_get_wtime() - start_time;
+		
+
+		printf("sorted:%d | " , ArrayUtils::isSorted(SequentialSort::array, SequentialSort::numElements));
+	    printf("sequential time:%f\n",time);
+	}
 
 }
 
 void testOpenMP(bool regular){
     printf("testing openmp | reg: %d\n", regular);
-	OpenMPSort::genArray(arrayLengths);
-	double start_time = omp_get_wtime();
-	OpenMPSort::sortArray(arrayLengths, regular);
-	double time = omp_get_wtime() - start_time;
 
-	printf("sorted:%d | " , ArrayUtils::isSorted(OpenMPSort::array, OpenMPSort::numElements));
-	if(!regular){
-        printf("regular openMP time:%f\n",time);
-	}else{
-        printf("openMP time:%f\n",time);
-    }
+    for (int i = 0; i < experiments; ++i)
+    {
+		OpenMPSort::genArray(arrayLengths,i);
+		double start_time = omp_get_wtime();
+		OpenMPSort::sortArray(arrayLengths, regular);
+		double time = omp_get_wtime() - start_time;
+		printf("sorted:%d | " , ArrayUtils::isSorted(OpenMPSort::array, OpenMPSort::numElements));
+		if(!regular){
+	        printf("regular openMP time:%f\n",time);
+		}else{
+	        printf("openMP time:%f\n",time);
+	    }    
+	}
+	
+	
 }
 
 void testParallelism(){
@@ -57,20 +67,23 @@ void testParallelism(){
         #pragma omp single nowait
 	     { 
 			printf("A "); 
+			int c =100;
 
 			#pragma omp task 
 			{
-			printf("race %d",omp_get_thread_num());
-			printf("race %d",omp_get_thread_num());
-			printf("race %d",omp_get_thread_num());
-			printf("race %d",omp_get_thread_num());
+				for (int i = 0; i < c; ++i)
+				{
+					printf("race %d",omp_get_thread_num());
+				}
 			} 
+
 			#pragma omp task 
 			{
-			printf("car %d",omp_get_thread_num());
-			printf("car %d",omp_get_thread_num());
-			printf("car %d",omp_get_thread_num());
-			printf("car %d",omp_get_thread_num());
+			
+				for (int i = 0; i < c; ++i){
+					printf("car %d",omp_get_thread_num());
+				}
+
 			} 
 		 } 
 	} // End of parallel region 

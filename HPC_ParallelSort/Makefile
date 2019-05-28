@@ -2,7 +2,7 @@
 CC=g++         # the compiler
 LIBS=-lm       # the libraries we will ref
 
-main: main.cpp sequentialSort.h openMPSort.h
+main: main.cpp sequentialSort.h openMPSort.h arrayUtils.cpp
 	$(CC) -o main -fopenmp main.cpp -std=c++11
 
 clean:

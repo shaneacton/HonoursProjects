@@ -13,8 +13,8 @@ namespace ArrayUtils {
 
 	int* arr;
 
-	int* generateArray(long length){
-		srand(length);
+	int* generateArray(long length, int seed){
+		srand(length*seed);
 
 		arr = new int[length];
 
