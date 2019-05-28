@@ -9,7 +9,7 @@ using namespace std;
 #include "openMPSort.h"
 
 
-long arrayLengths =1280000;
+long arrayLengths =12800000;
 void testSequential();
 void testOpenMP();
 void testMPI();
