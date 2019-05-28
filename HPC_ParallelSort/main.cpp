@@ -19,7 +19,7 @@ int main( int argc, const char* argv[] )
 {
 	//testSequential();
     //testOpenMP();
-	
+	testParallelism();
 }
 
 void testSequential(){
