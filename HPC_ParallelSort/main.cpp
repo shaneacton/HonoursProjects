@@ -17,8 +17,8 @@ void testParallelism();
 
 int main( int argc, const char* argv[] )
 {
-	testSequential();
-    testOpenMP();
+	//testSequential();
+    //testOpenMP();
 	
 }
 
@@ -47,9 +47,7 @@ void testOpenMP(){
 void testParallelism(){
 	#pragma omp parallel 
     { 
-
-
-	     #pragma omp single 
+        #pragma omp single
 	     { 
 			printf("A "); 
 
