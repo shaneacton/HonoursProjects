@@ -135,7 +135,7 @@ namespace OpenMPSort {
       
 
       if(parallelMethod == "tasks"){
-        printf("%s branching using tasks from thread %d at level %d - creating new thread\n" ,pathID.c_str(), omp_get_thread_num(), level);
+        //printf("%s branching using tasks from thread %d at level %d - creating new thread\n" ,pathID.c_str(), omp_get_thread_num(), level);
 
         #pragma omp  task
         {sortArrayInternal(start,belowPivot+1, level+1, (pathID + "L"));}
@@ -143,7 +143,7 @@ namespace OpenMPSort {
         #pragma omp  task
         {sortArrayInternal(belowPivot+2,end, level + 1, (pathID + "R"));}
       }else{
-        printf("%s branching using sections from thread %d at level %d - creating new thread\n" ,pathID.c_str(), omp_get_thread_num(), level);
+        //printf("%s branching using sections from thread %d at level %d - creating new thread\n" ,pathID.c_str(), omp_get_thread_num(), level);
 
         #pragma omp parallel sections
         {
