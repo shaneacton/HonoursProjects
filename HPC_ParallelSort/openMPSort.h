@@ -45,7 +45,7 @@ namespace OpenMPSort {
     	    if(!regularIntervals){
     		    sortArrayInternal(0,length, 0, "");
     	    }else{
-    	        interval = length/numThreads;
+    	        int interval = length/numThreads;
                 for (int i = 0; i < numThreads; ++i) {
                     if(i == numThreads -1) {
                         { sortArrayInternal(0, length, 0, "REG("+std::to_string(i)+")"); }
