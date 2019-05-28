@@ -48,7 +48,7 @@ void testSequential(){
 }
 
 void testOpenMP(bool regular){
-    printf("testing openmp %s | reg: %d\n", ,regular);
+    printf("testing openmp %s | reg: %d\n",OpenMPSort::parallelMethod.c_str() ,regular);
 
     double timeTotal = 0;
 
