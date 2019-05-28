@@ -17,9 +17,9 @@ void testParallelism();
 
 int main( int argc, const char* argv[] )
 {
-	//testSequential();
-    //testOpenMP();
-	testParallelism();
+	testSequential();
+    testOpenMP();
+	//testParallelism();
 }
 
 void testSequential(){

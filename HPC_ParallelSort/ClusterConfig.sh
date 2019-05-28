@@ -1,10 +1,5 @@
 #!/bin/sh
-
-######################################################################################################
-#                                                                                                    #
-# This example submission script contains several important directives, please examine it thoroughly #
-#                                                                                                    #
-######################################################################################################
+###########################################################################################
 
 # The line below indicates which accounting group to log your job against - must be its
 #SBATCH --account=icts
@@ -13,8 +8,7 @@
 #SBATCH --partition=curie
 
 # The line below means you need 1 worker node and a total of 2 cores
-#SBATCH --nodes=1 --ntasks=4
-#  To evenly split over two nodes use: --ntasks-per-node=2
+#SBATCH --nodes=1 --ntasks=8
 
 # The line below indicates the wall time your job will need, 10 hours for example. NB, this is a mandatory directive!
 # Note that 10:00 is 10 minutes
