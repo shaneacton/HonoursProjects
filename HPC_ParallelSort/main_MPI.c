@@ -46,23 +46,6 @@ void testMPI(){
 
 	double start_time = omp_get_wtime();
 	mpiSort(arr, numElements);		
-	//printf("5r:%d\n",rank);
-	// double time = omp_get_wtime() - start_time;
-	// printf("6r:%d\n",rank);
-	// //printArray(arr,numElements);
-	// if(rank ==0){
-	// 	printf("sorted:%d | " , isSorted(arr, numElements));
-	//     printf("regular MPI time:%f\n",time);
-	// }
-	// printf("7r:%d\n",rank);
-
-	// //free(arr);
-	// printf("8r:%d\n",rank);
-    //MPI_Finalize();
-	
-
-	
-
 
 	
 	

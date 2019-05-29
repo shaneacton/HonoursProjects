@@ -144,7 +144,7 @@ void psrs_mpi(int *array, int N)
     MPI_Comm_rank(MPI_COMM_WORLD,&myId);
     MPI_Get_processor_name(processorName,&nameLength);
 
-    printf("Process %d is on %s\n",myId, processorName);
+    //printf("Process %d is on %s\n",myId, processorName);
 
     pivots = (int *) malloc(p*sizeof(int));
     partitionSizes = (int *) malloc(p*sizeof(int));

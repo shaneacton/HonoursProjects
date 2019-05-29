@@ -43,7 +43,7 @@ for threadCount in $( seq 2 $numThreads ); do
 	then
 		#echo 'threads = ' $threadCount;
 		export OMP_NUM_THREADS=$threadCount
-		numElements=1000000;
+		numElements=500000;
 
 		for i in {1..3}; do
 			#echo 'num elements:' $numElements;
@@ -51,7 +51,7 @@ for threadCount in $( seq 2 $numThreads ); do
 			./main_cpp $numElements
 			./main_OMP $numElements
 
-			for experiment in {0..2}; do
+			for experiment in {0..3}; do
 
 				mpirun -np $threadCount main_MPI $numElements $experiment
 				mpirun -np $threadCount main_MPIReg $numElements $experiment

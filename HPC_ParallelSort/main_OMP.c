@@ -8,7 +8,7 @@
 #include <stdlib.h>
 
 long numElements = 10000000;
-int experiments =5;
+int experiments =3;
 
 void testRegOpenMP();
 
