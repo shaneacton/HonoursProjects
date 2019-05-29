@@ -1,14 +1,14 @@
 
 #include "openMPRegSort.c"
-#include "stdio.h"
+//#include "stdio.h"
 #include "string.h"
-#include "stdlib.h"
+//#include "stdlib.h"
 #include "arrayUtils.c"
 
 #include "MPIRegSort.c"
-#include <stdlib.h>
-#include <sys/time.h>
-#include <unistd.h>
+//#include <stdlib.h>
+//#include <sys/time.h>
+//#include <unistd.h>
 #include "mpi.h"
 
 long numElements = 10000000;
