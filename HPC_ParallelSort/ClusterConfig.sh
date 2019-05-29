@@ -31,11 +31,11 @@ module load mpi/openmpi-4.0.1
 make
 make main_c
 
-./main_cpp 1000000
-./main_c 1000000
+./main_cpp 1000
+./main_c 1000
 
-./main_cpp 10000000
-./main_c 10000000
+./main_cpp 10000
+./main_c 10000
 
-./main_cpp 100000000
-./main_c 100000000
+#./main_cpp 100000000
+#./main_c 100000000

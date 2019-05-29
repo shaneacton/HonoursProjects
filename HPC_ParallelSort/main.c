@@ -11,8 +11,8 @@
 #include <unistd.h>
 #include "mpi.h"
 
-long numElements = 100000;
-int experiments =5;
+long numElements = 10000000;
+int experiments =3;
 
 void testRegOpenMP();
 void testRegMPI();
@@ -67,6 +67,7 @@ void testRegMPI(){
 
     for (int i = 0; i < experiments; ++i)
     {
+    	printf("experiment %d\n",i);
 		generateArray(arr,numElements,i);		
 		double start_time = omp_get_wtime();
 		psrs_mpi(arr, numElements);		
