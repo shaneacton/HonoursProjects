@@ -20,18 +20,20 @@ void testRegMPI();
 int main(int argc, char *argv[])
 {
 	if(argc>1){
+		printf("c received args: %s\n", argv[1]);
 		int argElems = atoi(argv[1]);
-		printf("ArrayLength = %d\n", argElems);
+		//printf("ArrayLength = %d\n", argElems);
 		numElements = argElems;
 	}
 
 	MPI_Init(&argc,&argv);
+	printf("initialised MPI\n");
 	testRegOpenMP();
 	testRegMPI();
 }
 
 void testRegOpenMP(){
-    printf("testing regular openmp\n" );
+    printf("testing regular openmp, num experiments:%d\n", experiments );
 
     double timeTotal = 0;
    	int *arr;
