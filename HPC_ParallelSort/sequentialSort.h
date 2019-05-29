@@ -19,17 +19,12 @@ namespace SequentialSort {
 
   void genArray(long nElements,int expNo){
     numElements = nElements;
-    //printf("generating array of length %ld\n", numElements);
     array = ArrayUtils::generateArray(nElements, expNo);
-    //ArrayUtils::printArray(array, numElements);
-  
-    //printf("sorted:%d\n" , ArrayUtils::isSorted(array, numElements));
   }
 
   void sortArray(int start,int end){
     int length = end-start;
     if(length<= 1){
-      //printf("reached base, start:%d end:%d\n",start,end);
       return;
     }
 

@@ -14,7 +14,6 @@ int experiments = 5;
 
 void testSequential();
 void testOpenMP();
-void testMPI();
 void testParallelism();
 
 int main( int argc, const char* argv[] )
@@ -63,12 +62,13 @@ void testOpenMP(){
 	    
 	}
 
-	printf("averagetime:%f\n",(timeTotal/experiments));
+	printf("averagetime:%f\n\n",(timeTotal/experiments));
 	
 	
 }
 
 void testParallelism(){
+	//we expect interleavings of car and race
 	#pragma omp parallel 
     { 
         #pragma omp single nowait
