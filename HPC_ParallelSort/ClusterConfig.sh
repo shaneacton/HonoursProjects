@@ -33,10 +33,10 @@ make
 make main_c
 
 ./main_cpp 100000
-./main_c 100000
+mpirun -np 2 main_c 100000
 
-./main_cpp 1000000
-./main_c 1000000
+#./main_cpp 1000000
+#./main_c 1000000
 
 #./main_cpp 100000000
 #./main_c 100000000
