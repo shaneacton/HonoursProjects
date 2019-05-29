@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
             printf("Error starting MPI program. Terminating. \n");
             MPI_Abort(MPI_COMM_WORLD, rc);
     }	
-    printf("initialised MPI\n");
+    //printf("initialised MPI\n");
 
 
 	testRegOpenMP();
@@ -92,7 +92,7 @@ void testRegMPI(){
 	MPI_Finalize();
 	free(arr);
 
-	printf("averagetime:%f\n",(timeTotal/experiments));
+	printf("averagetime:%f\n\n--------------------------------\n\n",(timeTotal/experiments));
 	
 	
 }
