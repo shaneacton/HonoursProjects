@@ -37,9 +37,6 @@ make main_MPI
 make main_MPIReg
 
 
-
-
-
 for threadCount in $( seq 2 $numThreads ); do
 	if [ $((threadCount%2)) == 0 -a $threadCount != 6 ];
 	#if [ $threadCount != 6 ];

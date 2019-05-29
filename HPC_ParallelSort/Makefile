@@ -22,4 +22,3 @@ clean:
 
 run:
 	./main_cpp
-	./main_c

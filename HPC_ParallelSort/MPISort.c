@@ -1,32 +1,35 @@
-//http://monismith.info/cs599/examples.html
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <mpi.h>
+#include "arrayUtils.c"
 
+
+#define X 1000
 
 void quicksort(int *, long, long);
 int partition(int *, long, long);
-int choosePivot(int *, long, long);
+long choosePivot(int *, long, long);
 void swap(int *, int *);
 
-void mpiSort(int *arr, long N){
-
-  int rank, size, pivot, recvSize;
-  int partner;
+int mpiSort(int * arr, long N)
+{
+  int rank, size, pivot, partner, recvSize;
+  double start, end;
   MPI_Status status;
 
   MPI_Comm_size(MPI_COMM_WORLD, &size);
   MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
+  srand(123456 + 10000*rank);
 
   int * newArr;
   int * recvBuffer = (int *) malloc(sizeof(int)*N/size);
 
   long i, j;
-
+  
   if(rank == 0)
   {
+    start = MPI_Wtime();
     pivot = arr[choosePivot(arr, 0, N/size-1)];
     //printf("The pivot is %d\n", pivot);
   }
@@ -35,15 +38,11 @@ void mpiSort(int *arr, long N){
 
   //Assume that the number of processes is a power of 2
 
-  int storeIdx = 0;
+  long storeIdx = 0;
   long arrSize = N/size;
-
-  //printf("1, size=%d, size/2=%d\n",size, (size/2));
-
 
   for(partner = size/2; partner > 0; partner = partner >> 1)
   {
-    //printf("2\n");
     storeIdx = 0;
     for(i = 0; i < arrSize; i++)
     {
@@ -62,7 +61,7 @@ void mpiSort(int *arr, long N){
 
       //printf("rank + partner is %d\n", rank + partner);
 
-      int sendVal = arrSize-storeIdx;
+      long sendVal = arrSize-storeIdx;
       recvSize = 0;
       MPI_Isend(&sendVal, 1, MPI_INT, rank+partner, partner+size, MPI_COMM_WORLD, &requestSend);
       MPI_Irecv(&recvSize, 1, MPI_INT, rank+partner, partner+size, MPI_COMM_WORLD, &request);
@@ -89,7 +88,7 @@ void mpiSort(int *arr, long N){
     }
     else
     {
-      int sendVal = storeIdx;
+      long sendVal = storeIdx;
       recvSize = 0;
       MPI_Isend(&sendVal, 1, MPI_INT, rank-partner, partner+size, MPI_COMM_WORLD, &requestSend);
       MPI_Irecv(&recvSize, 1, MPI_INT, rank-partner, partner+size, MPI_COMM_WORLD, &request);
@@ -162,28 +161,16 @@ void mpiSort(int *arr, long N){
 
   }
 
-  //printf("3\n");
-
   if(arrSize > 0)
     quicksort(arr, 0, arrSize-1);
 
-  //printf("4\n");
-
-  int * fullArr, * displacement;
-  long  * sizeArr;
-  //printf("4.1\n");
+  int * sizeArr, * fullArr, * displacement;
   if(rank == 0)
   {
-    sizeArr = (long *) malloc(sizeof(long)*size);
-    //printf("4.2\n");
-    fullArr = (long *) malloc(sizeof(long)*N);
-    //fullArr = (int *) malloc(sizeof(long)*N);
-    //("4.3\n");
+    sizeArr = (int *) malloc(sizeof(int)*size);
+    fullArr = (int *) malloc(sizeof(int)*N);
     displacement = (int *) malloc(sizeof(int)*size);
-    //printf("4.4\n");
   }
-
-  //printf("5\n");
 
   MPI_Gather(&arrSize, 1, MPI_INT, sizeArr, 1, MPI_INT, 0, MPI_COMM_WORLD);
 
@@ -191,61 +178,66 @@ void mpiSort(int *arr, long N){
   {
     i = 0;
     displacement[0] = 0;
-    //printf("displacement[%ld] = %d\n", i, displacement[i]);
+    //printf("displacement[%d] = %d\n", i, displacement[i]);
     //Perform a scan on sizeArr to determine the displacement of each data location.
     for(i = 1; i < size; i++)
     {
       displacement[i] = sizeArr[i-1] + displacement[i-1];
-      //printf("displacement[%ld] = %d\n", i, displacement[i]);
+      //printf("displacement[%d] = %d\n", i, displacement[i]);
     }
   }
-
-  //printf("6\n");
+  //printf("1r:%d\n",rank);
 
   MPI_Gatherv(arr, arrSize, MPI_INT, fullArr, sizeArr, displacement, MPI_INT, 0, MPI_COMM_WORLD);
-
+  //printf("2r:%d\n",rank);
   MPI_Barrier(MPI_COMM_WORLD);
   if(arrSize > 0){
-    //free((void *) arr);
+    free((void *) arr);
   }
 
-  //printf("7\n");
+  //printf("3r:%d\n",rank);
 
   if(rank == 0)
   {
-
-    free((void *) fullArr);
+   // for(i = 0; i < N; i++)
+   //   printf("%d ", fullArr[i]);
+    end = MPI_Wtime();
+    //printf("Time required was %lf seconds\n", end-start);
     free((void *) sizeArr);
     free((void *) displacement);
+
+    //printf("3.5r:%d\n",rank);
+
+    printf("sorted:%d | \n" , isSorted(fullArr, N));
+
+    //printf("3.6r:%d\n",rank);
+
+    free((void *) fullArr);
+
+    printf("regular MPI time:%f\n",(end-start));
   }
 
+  //printf("4r:%d\n",rank);
+  MPI_Finalize();
+
+  return 0;
 }
 
 void quicksort(int * arr, long lo, long hi)
 {
-  //printf("3.1\n");
   if(lo < hi)
   {
-    //printf("3.2\n");
     int p = partition(arr, lo, hi);
-    //printf("3.3\n");
     quicksort(arr, lo, p - 1);
-    //printf("3.4\n");
     quicksort(arr, p + 1, hi);
-    //printf("3.5\n");
   }
 }
 
 int partition(int * arr, long lo, long hi)
 {
-
-  //printf("3.6\n");
   long i;
   long pivotIdx = choosePivot(arr, lo, hi);
-  //printf("3.65\n");
   int pivotVal = arr[pivotIdx];
-
-  //printf("3.7\n");
 
   swap(&arr[pivotIdx], &arr[hi]);
 
@@ -272,11 +264,11 @@ void swap(int * x, int * y)
 }
 
 //Select the median of arr[lo], arr[hi], and arr[(lo+hi)/2]
-int choosePivot(int * arr, long lo, long hi)
+long choosePivot(int * arr, long lo, long hi)
 {
   long mid = (lo+hi)/2;
 
-  long temp;
+  int temp;
   if(arr[lo] > arr[hi])
   {
     temp = lo;

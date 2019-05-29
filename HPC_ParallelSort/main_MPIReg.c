@@ -8,7 +8,7 @@
 
 
 
-long numElements = 10000000;
+long numElements = 100000000;
 int experimentNo = 0;
 
 
@@ -38,7 +38,6 @@ int main(int argc, char *argv[])
 void testRegMPI(){
     printf("testing regular MPI, length:%ld\n", numElements );
 
-    double timeTotal = 0;
    	int *arr;
    	arr= malloc(numElements * sizeof(int));
 
@@ -50,14 +49,15 @@ void testRegMPI(){
 	double start_time = omp_get_wtime();
 	psrs_mpi(arr, numElements);		
 	double time = omp_get_wtime() - start_time;
-	timeTotal+=time;
 
 	//printArray(arr,numElements);
-	printf("sorted:%d | " , isSorted(arr, numElements));
-    printf("regular MPI time:%f\n",time);
-	    
-	free(arr);
 
+	if(myId == 0){
+		printf("sorted:%d | " , isSorted(arr, numElements));
+	    printf("regular MPI time:%f, process:%d\n",time,myId);
+	}  
+
+	free(arr);
 	MPI_Finalize();
 
 	

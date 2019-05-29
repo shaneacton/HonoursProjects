@@ -9,7 +9,7 @@
 
 
 
-long numElements = 10000000;
+long numElements = 100000000;
 int experimentNo = 0;
 
 void testMPI();
@@ -35,28 +35,33 @@ int main(int argc, char *argv[])
 }
 
 void testMPI(){
-    printf("testing MPI\n" );
+    
 
-    double timeTotal = 0;
    	int *arr;
    	arr= malloc(numElements * sizeof(int));
+   	int rank;
+   	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
 	generateArray(arr,numElements,experimentNo);		
 
 	double start_time = omp_get_wtime();
 	mpiSort(arr, numElements);		
-	double time = omp_get_wtime() - start_time;
-	timeTotal+=time;
+	//printf("5r:%d\n",rank);
+	// double time = omp_get_wtime() - start_time;
+	// printf("6r:%d\n",rank);
+	// //printArray(arr,numElements);
+	// if(rank ==0){
+	// 	printf("sorted:%d | " , isSorted(arr, numElements));
+	//     printf("regular MPI time:%f\n",time);
+	// }
+	// printf("7r:%d\n",rank);
 
-	//printArray(arr,numElements);
-	printf("sorted:%d | " , isSorted(arr, numElements));
-    printf("regular MPI time:%f\n",time);
-    
-
-    MPI_Finalize();
+	// //free(arr);
+	// printf("8r:%d\n",rank);
+    //MPI_Finalize();
 	
 
-	free(arr);
+	
 
 
 	
