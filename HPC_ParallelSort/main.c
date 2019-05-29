@@ -11,7 +11,7 @@
 #include <unistd.h>
 #include "mpi.h"
 
-long numElements = 2000000;
+long numElements = 100000;
 int experiments =5;
 
 void testRegOpenMP();
@@ -19,6 +19,12 @@ void testRegMPI();
 
 int main(int argc, char *argv[])
 {
+	if(argc>1){
+		int argElems = atoi(argv[1]);
+		printf("ArrayLength = %d\n", argElems);
+		numElements = argElems;
+	}
+
 	MPI_Init(&argc,&argv);
 	testRegOpenMP();
 	testRegMPI();

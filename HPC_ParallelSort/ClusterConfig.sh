@@ -26,5 +26,14 @@
 # NB, for more information read https://computing.llnl.gov/linux/slurm/sbatch.html
 
 # Use module to gain easy access to software, typing module avail lists all packages.
+module load mpi/openmpi-4.0.1
+
 make
-./main
+./main_cpp 1000000
+./main_c 1000000
+
+./main_cpp 10000000
+./main_c 10000000
+
+./main_cpp 100000000
+./main_c 100000000

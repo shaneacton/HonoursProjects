@@ -8,8 +8,8 @@
 #include <unistd.h>
 #include "mpi.h"
 
-int i,j,k;
-int N = 64;
+long i,j,k;
+long N = 64;
 
 
 int cmp(const void * a, const void * b) {
@@ -18,7 +18,7 @@ int cmp(const void * a, const void * b) {
   else return 0;
 }
 
-void phase1(int *array, int N, int startIndex, int subArraySize, int *pivots, int p) {
+void phase1(int *array, long N, long startIndex, long subArraySize, int *pivots, int p) {
   qsort(array + startIndex, subArraySize, sizeof(array[0]), cmp);
 
   for (i = 0; i < p; i++) {
@@ -27,10 +27,10 @@ void phase1(int *array, int N, int startIndex, int subArraySize, int *pivots, in
   return;
 }
 
-void phase2(int *array, int startIndex, int subArraySize, int *pivots, int *partitionSizes, int p, int myId) {
+void phase2(int *array, long startIndex, long subArraySize, int *pivots, long *partitionSizes, int p, int myId) {
   int *collectedPivots = (int *) malloc(p * p * sizeof(pivots[0]));
   int *phase2Pivots = (int *) malloc((p - 1) * sizeof(pivots[0])); 
-  int index = 0;
+  long index = 0;
 
   MPI_Gather(pivots, p, MPI_INT, collectedPivots, p, MPI_INT, 0, MPI_COMM_WORLD);       
   if (myId == 0) {
@@ -58,10 +58,10 @@ void phase2(int *array, int startIndex, int subArraySize, int *pivots, int *part
   return;
 }
 
-void phase3(int *array, int startIndex, int *partitionSizes, int **newPartitions, int *newPartitionSizes, int p) {
-  int totalSize = 0;
-  int *sendDisp = (int *) malloc(p * sizeof(int));
-  int *recvDisp = (int *) malloc(p * sizeof(int));
+void phase3(int *array, long startIndex, long *partitionSizes, int **newPartitions, long *newPartitionSizes, int p) {
+  long totalSize = 0;
+  long *sendDisp = (long *) malloc(p * sizeof(long));
+  long *recvDisp = (long *) malloc(p * sizeof(long));
 
   MPI_Alltoall(partitionSizes, 1, MPI_INT, newPartitionSizes, 1, MPI_INT, MPI_COMM_WORLD);
 
@@ -84,12 +84,12 @@ void phase3(int *array, int startIndex, int *partitionSizes, int **newPartitions
   return;
 }
 
-void phase4(int *partitions, int *partitionSizes, int p, int myId, int *array) {
+void phase4(int *partitions, long *partitionSizes, int p, int myId, int *array) {
   int *sortedSubList;
-  int *recvDisp, *indexes, *partitionEnds, *subListSizes, totalListSize;
+  long *subListSizes, *indexes, totalListSize, *partitionEnds, *recvDisp;
 
-  indexes = (int *) malloc(p * sizeof(int));
-  partitionEnds = (int *) malloc(p * sizeof(int));
+  indexes = (long *) malloc(p * sizeof(long));
+  partitionEnds = (long *) malloc(p * sizeof(long));
   indexes[0] = 0;
   totalListSize = partitionSizes[0];
   for ( i = 1; i < p; i++) {
@@ -100,8 +100,8 @@ void phase4(int *partitions, int *partitionSizes, int p, int myId, int *array) {
   partitionEnds[p - 1] = totalListSize;
 
   sortedSubList = (int *) malloc(totalListSize * sizeof(int));
-  subListSizes = (int *) malloc(p * sizeof(int));
-  recvDisp = (int *) malloc(p * sizeof(int));
+  subListSizes = (long *) malloc(p * sizeof(long));
+  recvDisp = (long *) malloc(p * sizeof(long));
 
   for ( i = 0; i < totalListSize; i++) {
     int lowest = INT_MAX;
@@ -135,10 +135,11 @@ void phase4(int *partitions, int *partitionSizes, int p, int myId, int *array) {
   return;
 }
 
-void psrs_mpi(int *array, int N)    
+void psrs_mpi(int *array, long N)    
 {
-    int p, myId, *partitionSizes, *newPartitionSizes, nameLength;
-    int subArraySize, startIndex, endIndex, *pivots, *newPartitions;
+    int p, myId, nameLength;
+    int *pivots, *newPartitions;
+    long startIndex, endIndex, subArraySize , *partitionSizes, *newPartitionSizes;
     char processorName[MPI_MAX_PROCESSOR_NAME];
 
 
@@ -149,8 +150,8 @@ void psrs_mpi(int *array, int N)
     //printf("Process %d is on %s\n",myId, processorName);
 
     pivots = (int *) malloc(p*sizeof(int));
-    partitionSizes = (int *) malloc(p*sizeof(int));
-    newPartitionSizes = (int *) malloc(p*sizeof(int));
+    partitionSizes = (long *) malloc(p*sizeof(long));
+    newPartitionSizes = (long *) malloc(p*sizeof(long));
     for ( k = 0; k < p; k++) {
       partitionSizes[k] = 0;
     }
