@@ -29,6 +29,8 @@
 module load mpi/openmpi-4.0.1
 
 make
+make main_c
+
 ./main_cpp 1000000
 ./main_c 1000000
 
