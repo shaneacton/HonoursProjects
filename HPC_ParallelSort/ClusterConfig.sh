@@ -27,6 +27,7 @@
 
 # Use module to gain easy access to software, typing module avail lists all packages.
 module load mpi/openmpi-4.0.1
+export OMP_NUM_THREADS=8
 
 make
 make main_c
