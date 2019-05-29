@@ -13,7 +13,7 @@
 #include "mpi.h"
 
 long numElements = 10000000;
-int experiments =2;
+int experiments =4;
 
 void testRegOpenMP();
 void testMPI();
