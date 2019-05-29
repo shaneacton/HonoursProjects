@@ -10,7 +10,7 @@ main_cpp: main.cpp sequentialSort.h openMPSort.h arrayUtils.cpp
 	$(CC) -o main_cpp -fopenmp  main.cpp -std=c++11
 
 main_c: main.c openMPRegSort.c arrayUtils.c MPIRegSort.c
-	gcc -o main_c -fopenmp main.c --std=c11 -lm
+	mpicc -o main_c -fopenmp main.c --std=c11 -lm
 
 clean:
 	rm main_cpp

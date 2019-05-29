@@ -41,6 +41,7 @@ void phase2(int *array, int startIndex, int subArraySize, int *pivots, int *part
       phase2Pivots[i] = collectedPivots[(((i+1) * p) + (p / 2)) - 1];
     }
   }
+
   MPI_Bcast(phase2Pivots, p - 1, MPI_INT, 0, MPI_COMM_WORLD);
   for ( i = 0; i < subArraySize; i++) {
     if (array[startIndex + i] > phase2Pivots[index]) {
@@ -145,7 +146,7 @@ void psrs_mpi(int *array, int N)
     MPI_Comm_rank(MPI_COMM_WORLD,&myId);
     MPI_Get_processor_name(processorName,&nameLength);
 
-    printf("Process %d is on %s\n",myId, processorName);
+    //printf("Process %d is on %s\n",myId, processorName);
 
     pivots = (int *) malloc(p*sizeof(int));
     partitionSizes = (int *) malloc(p*sizeof(int));
@@ -172,11 +173,6 @@ void psrs_mpi(int *array, int N)
       phase4(newPartitions, newPartitionSizes, p, myId, array);
     }
 
-    if (myId == 0) 
-     for(k = 0; k < N; k++){
-        printf("%d ",array[k]);
-     }
-     printf("\n");
     if (p > 1) {
       free(newPartitions);
     }
@@ -185,22 +181,6 @@ void psrs_mpi(int *array, int N)
     free(pivots);
 
 
-  free(array);
-  MPI_Finalize();
+  
 
-}
-
-int main(int argc, char *argv[]) {
-
-  int *array;
-  array = (int *) malloc(N*sizeof(int));
-
-    srand(100);
-    for ( k = 0; k < N; k++) {
-      array[k] = rand()%100;
-    }
-    MPI_Init(&argc,&argv);
-    psrs_mpi(array,N);         
-
-  return 0;
 }

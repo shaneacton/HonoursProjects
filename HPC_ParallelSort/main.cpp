@@ -9,7 +9,7 @@ using namespace std;
 #include "openMPSort.h"
 
 
-long arrayLengths =50000000;
+long arrayLengths =2000000;
 int experiments = 5;
 
 void testSequential();
@@ -20,7 +20,7 @@ int main( int argc, const char* argv[] )
 {
 	testSequential();
 
-	printf("\nUsing Parallel. threads=%d\n",omp_get_max_threads());
+	printf("\nUsing Parallel. threads=%d\n\n",omp_get_max_threads());
     testOpenMP();
 	//testParallelism();
 }

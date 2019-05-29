@@ -5,9 +5,13 @@
 #include "stdlib.h"
 #include "arrayUtils.c"
 
+#include "MPIRegSort.c"
+#include <stdlib.h>
+#include <sys/time.h>
+#include <unistd.h>
 #include "mpi.h"
 
-long numElements = 50000000;
+long numElements = 2000000;
 int experiments =5;
 
 void testRegOpenMP();
@@ -17,7 +21,7 @@ int main(int argc, char *argv[])
 {
 	MPI_Init(&argc,&argv);
 	testRegOpenMP();
-	testRegOpenMP();
+	testRegMPI();
 }
 
 void testRegOpenMP(){
@@ -46,7 +50,7 @@ void testRegOpenMP(){
 	
 }
 
-void testRegOpenMP(){
+void testRegMPI(){
     printf("testing regular MPI\n" );
 
     double timeTotal = 0;
@@ -66,6 +70,8 @@ void testRegOpenMP(){
 	    printf("regular MPI time:%f\n",time);
 	    
 	}
+	MPI_Finalize();
+	free(arr);
 
 	printf("averagetime:%f\n",(timeTotal/experiments));
 	
