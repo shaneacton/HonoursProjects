@@ -137,7 +137,7 @@ void phase4(int *partitions, long *partitionSizes, int p, int myId, int *array) 
 
 void psrs_mpi(int *array, long N)    
 {
-    printf("sorting in c\n");
+    //printf("sorting in c\n");
     int p, myId, nameLength;
     int *pivots, *newPartitions;
     long startIndex, endIndex, subArraySize , *partitionSizes, *newPartitionSizes;
@@ -149,10 +149,10 @@ void psrs_mpi(int *array, long N)
     MPI_Get_processor_name(processorName,&nameLength);
 
     if(p==0){
-      printf("WARNING!: p=0");
+      //printf("WARNING!: p=0");
     }
 
-    printf("Process %d is on %s\n",myId, processorName);
+    //printf("Process %d is on %s\n",myId, processorName);
 
     pivots = (int *) malloc(p*sizeof(int));
     partitionSizes = (long *) malloc(p*sizeof(long));
@@ -161,9 +161,9 @@ void psrs_mpi(int *array, long N)
       partitionSizes[k] = 0;
     }
 
-    printf("before divP\n");
+    //printf("before divP\n");
     startIndex = myId * N / p;
-    printf("after divP\n");
+    //printf("after divP\n");
     if (p == (myId + 1)) {
       endIndex = N;
     } 

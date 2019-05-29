@@ -10,7 +10,7 @@ using namespace std;
 
 
 long arrayLengths =10000000;
-int experiments = 3;
+int experiments = 2;
 
 void testSequential();
 void testOpenMP();
