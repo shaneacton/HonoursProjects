@@ -1,0 +1,65 @@
+
+#include "mpi.h"
+#include "MPIRegSort.c"
+#include <stdlib.h>
+#include "arrayUtils.c"
+#include "string.h"
+#include <omp.h>
+
+
+
+long numElements = 10000000;
+int experimentNo = 0;
+
+
+void testRegMPI();
+
+int main(int argc, char *argv[])
+{
+	printf("main hello\n");
+
+	if(argc>1){
+		int argElems = atoi(argv[1]);
+		numElements = argElems;
+		experimentNo = atoi(argv[2]);
+
+	}
+
+	int rc = MPI_Init(&argc, &argv);
+    if(rc != MPI_SUCCESS) {
+            printf("Error starting MPI program. Terminating. \n");
+            MPI_Abort(MPI_COMM_WORLD, rc);
+    }
+
+
+	testRegMPI();
+}
+
+void testRegMPI(){
+    printf("testing regular MPI, length:%ld\n", numElements );
+
+    double timeTotal = 0;
+   	int *arr;
+   	arr= malloc(numElements * sizeof(int));
+
+   	int myId;
+    MPI_Comm_rank(MPI_COMM_WORLD,&myId);
+
+
+	generateArray(arr,numElements,experimentNo);		
+	double start_time = omp_get_wtime();
+	psrs_mpi(arr, numElements);		
+	double time = omp_get_wtime() - start_time;
+	timeTotal+=time;
+
+	//printArray(arr,numElements);
+	printf("sorted:%d | " , isSorted(arr, numElements));
+    printf("regular MPI time:%f\n",time);
+	    
+	free(arr);
+
+	MPI_Finalize();
+
+	
+	
+}

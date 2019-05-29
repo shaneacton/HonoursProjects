@@ -170,13 +170,14 @@ void mpiSort(int *arr, long N){
   //printf("4\n");
 
   int * fullArr, * displacement;
-  float  * sizeArr;
+  long  * sizeArr;
   //printf("4.1\n");
   if(rank == 0)
   {
-    sizeArr = (int *) malloc(sizeof(int)*size);
+    sizeArr = (long *) malloc(sizeof(long)*size);
     //printf("4.2\n");
-    fullArr = (int *) malloc(sizeof(long)*N);
+    fullArr = (long *) malloc(sizeof(long)*N);
+    //fullArr = (int *) malloc(sizeof(long)*N);
     //("4.3\n");
     displacement = (int *) malloc(sizeof(int)*size);
     //printf("4.4\n");

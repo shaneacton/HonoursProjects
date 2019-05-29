@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 ###########################################################################################
 
 # The line below indicates which accounting group to log your job against - must be its
@@ -26,17 +26,46 @@
 # NB, for more information read https://computing.llnl.gov/linux/slurm/sbatch.html
 
 # Use module to gain easy access to software, typing module avail lists all packages.
+numThreads=4;
+
 module load mpi/openmpi-4.0.1
-export OMP_NUM_THREADS=8
 
-make
-make main_c
 
-./main_cpp 100000
-mpirun -np 2 main_c 100000
+make main_cpp
+make main_OMP
+make main_MPI
+make main_MPIReg
 
-#./main_cpp 1000000
-#./main_c 1000000
 
-#./main_cpp 100000000
-#./main_c 100000000
+
+
+
+for threadCount in $( seq 2 $numThreads ); do
+	if [ $((threadCount%2)) == 0 -a $threadCount != 6 ];
+	#if [ $threadCount != 6 ];
+	then
+		#echo 'threads = ' $threadCount;
+		export OMP_NUM_THREADS=$threadCount
+		numElements=1000000;
+
+		for i in {1..3}; do
+			#echo 'num elements:' $numElements;
+
+			./main_cpp $numElements
+			./main_OMP $numElements
+
+			for experiment in {0..2}; do
+
+				mpirun -np $threadCount main_MPI $numElements $experiment
+				mpirun -np $threadCount main_MPIReg $numElements $experiment
+
+			done;
+
+			numElements=$((numElements * 5));
+
+
+		done;
+	fi;
+done;
+
+
