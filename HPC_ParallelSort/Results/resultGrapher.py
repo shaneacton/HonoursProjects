@@ -114,12 +114,12 @@ def plotResults(type):
     plt.ylabel("speed up")
     plt.show()
 
-for i in range(1,4):
+for i in range(1,5):
     readResults(i)
 
-#plotResults("sequential")
-#plotResults("threads")
-#plotResults("size")
+plotResults("sequential")
+plotResults("threads")
+plotResults("size")
 plotResults("nodes")
 
 
