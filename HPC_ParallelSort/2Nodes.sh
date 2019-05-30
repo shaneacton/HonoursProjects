@@ -8,7 +8,7 @@
 #SBATCH --partition=curie
 
 # The line below means you need 1 worker node and a total of 2 cores
-#SBATCH --nodes=1 --ntasks=8
+#SBATCH --nodes=2 --ntasks=8
 
 # The line below indicates the wall time your job will need, 10 hours for example. NB, this is a mandatory directive!
 # Note that 10:00 is 10 minutes
@@ -42,41 +42,37 @@ for threadCount in $( seq 7 $numThreads ); do
 	then
 		#echo 'threads = ' $threadCount;
 		export OMP_NUM_THREADS=$threadCount
-		numElements=100000;
+		numElements=12500000;
 
-		for i in {1..4}; do
-			#echo 'num elements:' $numElements;
 
-			if [ $threadCount == 2 ];
-			then
-				./main_cpp $numElements 1
-			fi;
+		if [ $threadCount == 2 ];
+		then
+			./main_cpp $numElements 1
+		fi;
 
-			if [ $threadCount != 2 ];
-			then
-				./main_cpp $numElements 0
-			fi;
+		if [ $threadCount != 2 ];
+		then
+			./main_cpp $numElements 0
+		fi;
 
-			./main_OMP $numElements
+		./main_OMP $numElements
 
-			echo "*MPI"
+		echo "*MPI"
 
-			for experiment in {0..9}; do
-				mpirun -np $threadCount --mca btl_openib_warn_nonexistent_if 0 --quiet main_MPI $numElements $experiment
-
-			done;
-
-			echo "*MPI Regular"
-
-			for experiment in {0..9}; do
-				mpirun -np $threadCount --mca btl_openib_warn_nonexistent_if 0 --quiet main_MPIReg $numElements $experiment
-
-			done;
-
-			numElements=$((numElements * 5));
-
+		for experiment in {0..9}; do
+			mpirun -np $threadCount --mca btl_openib_warn_nonexistent_if 0 --quiet main_MPI $numElements $experiment
 
 		done;
+
+		echo "*MPI Regular"
+
+		for experiment in {0..9}; do
+			mpirun -np $threadCount --mca btl_openib_warn_nonexistent_if 0 --quiet main_MPIReg $numElements $experiment
+
+		done;
+
+
+
 	fi;
 done;
 
