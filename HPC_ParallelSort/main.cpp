@@ -21,7 +21,7 @@ int main( int argc, const char* argv[])
 {
 	if(argc>1){
 		int argElems = std::stoi(argv[1]);
-		printf("###################################################\n**\t\tArrayLength = %d\t\t##\n###################################################\n", argElems);
+		printf("###################################################\n##\t\tArrayLength = %d\t\t##\n###################################################\n", argElems);
 		arrayLengths = argElems;
 
 		if(argc >2){
@@ -40,7 +40,7 @@ int main( int argc, const char* argv[])
 }
 
 void testSequential(){
-    printf("testing sequential\n");
+    printf("*sequential\n");
 	double timeTotal = 0;
 
     for (int i = 0; i < experiments; ++i){
@@ -54,12 +54,12 @@ void testSequential(){
 		//printf("sorted:%d | " , ArrayUtils::isSorted(SequentialSort::array, SequentialSort::numElements));
 	    //printf("sequential time:%f\n",time);
 	}
-	printf("averagetime:%f\n",(timeTotal/experiments));
+	printf("%f\n",(timeTotal/experiments));
 
 }
 
 void testOpenMP(){
-    printf("testing openmp\n" );
+    printf("*openmp\n" );
 
     double timeTotal = 0;
 
@@ -76,7 +76,7 @@ void testOpenMP(){
 	    
 	}
 
-	printf("averagetime:%f\n\n",(timeTotal/experiments));
+	printf("%f\n\n",(timeTotal/experiments));
 	
 	
 }

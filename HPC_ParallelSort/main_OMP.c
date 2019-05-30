@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
 }
 
 void testRegOpenMP(){
-    printf("testing regular openmp, num experiments:%d\n", experiments );
+    printf("*regular openmp\n");
 
     double timeTotal = 0;
    	int *arr;
@@ -45,7 +45,7 @@ void testRegOpenMP(){
 	    
 	}
 
-	printf("averagetime:%f\n\n",(timeTotal/experiments));
+	printf("%f\n\n",(timeTotal/experiments));
 	
 	
 }
