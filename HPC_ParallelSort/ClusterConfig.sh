@@ -26,7 +26,7 @@
 # NB, for more information read https://computing.llnl.gov/linux/slurm/sbatch.html
 
 # Use module to gain easy access to software, typing module avail lists all packages.
-numThreads=8;
+numThreads=9;
 
 module load mpi/openmpi-4.0.1
 
@@ -36,7 +36,7 @@ make main_OMP
 make main_MPI
 make main_MPIReg
 
-for threadCount in $( seq 2 $numThreads ); do
+for threadCount in $( seq 8 $numThreads ); do
 	if [ $((threadCount%2)) == 0 -a $threadCount != 6 ];
 	#if [ $threadCount != 6 ];
 	then

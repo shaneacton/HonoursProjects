@@ -44,7 +44,7 @@ void testRegMPI(){
     MPI_Comm_rank(MPI_COMM_WORLD,&myId);
 
     if(myId == 0 && experimentNo == 0){
-        printf("testing regular MPI, length:%ld\n", numElements );
+        //printf("testing regular MPI, length:%ld\n", numElements );
     }
 
 
