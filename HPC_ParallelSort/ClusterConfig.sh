@@ -43,9 +43,9 @@ for threadCount in $( seq 2 $numThreads ); do
 	then
 		#echo 'threads = ' $threadCount;
 		export OMP_NUM_THREADS=$threadCount
-		numElements=500000;
+		numElements=100000;
 
-		for i in {1..3}; do
+		for i in {1..4}; do
 			#echo 'num elements:' $numElements;
 
 			./main_cpp $numElements

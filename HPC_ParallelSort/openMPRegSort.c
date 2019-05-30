@@ -34,8 +34,8 @@ void psrs_sort(int *a, int n) {
   p = omp_get_max_threads();
   p = p*p*p;
   if(p > n){
-  p = floor(pow(n,0.33));
-  p-=p%2;
+    p = floor(pow(n,0.33));
+    p-=p%2;
   }else{
    p = omp_get_max_threads();
    p-=p%2;
