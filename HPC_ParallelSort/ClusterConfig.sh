@@ -12,7 +12,7 @@
 
 # The line below indicates the wall time your job will need, 10 hours for example. NB, this is a mandatory directive!
 # Note that 10:00 is 10 minutes
-#SBATCH --time=30:00
+#SBATCH --time=60:00
 
 # The line below means your job will be canceled if it consumes more than 4GB of RAM per requested core. Max 9000.
 
@@ -26,7 +26,7 @@
 # NB, for more information read https://computing.llnl.gov/linux/slurm/sbatch.html
 
 # Use module to gain easy access to software, typing module avail lists all packages.
-numThreads=9;
+numThreads=8;
 
 module load mpi/openmpi-4.0.1
 
@@ -36,7 +36,7 @@ make main_OMP
 make main_MPI
 make main_MPIReg
 
-for threadCount in $( seq 8 $numThreads ); do
+for threadCount in $( seq 7 $numThreads ); do
 	if [ $((threadCount%2)) == 0 -a $threadCount != 6 ];
 	#if [ $threadCount != 6 ];
 	then

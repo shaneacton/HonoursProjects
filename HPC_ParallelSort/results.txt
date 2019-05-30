@@ -1,0 +1,300 @@
+###################################################
+**		ArrayLength = 100000		##
+###################################################
+testing sequential
+averagetime:0.053950
+
+Using Parallel. threads=2
+
+testing openmp
+averagetime:0.063686
+
+testing regular openmp, num experiments:10
+averagetime:0.029847
+
+\ntesting MPI:\n
+0.169261
+0.149636
+0.118463
+0.086864
+0.082957
+0.098464
+0.062033
+0.101916
+0.139133
+0.083206
+
+\ntesting MPI Regular:\n
+0.094083
+0.088176
+0.132522
+0.107304
+0.101324
+0.118639
+0.092079
+0.141110
+0.074858
+0.111489
+
+###################################################
+**		ArrayLength = 500000		##
+###################################################
+testing sequential
+averagetime:0.314315
+
+Using Parallel. threads=2
+
+testing openmp
+averagetime:0.322066
+
+testing regular openmp, num experiments:10
+averagetime:0.172198
+
+\ntesting MPI:\n
+0.441054
+0.575736
+0.496298
+0.530976
+0.745182
+0.589821
+0.690264
+0.586084
+0.652010
+0.485473
+
+\ntesting MPI Regular:\n
+testing regular MPI, length:500000
+0.435095
+0.419282
+0.393253
+0.368068
+0.374099
+0.410454
+0.387529
+0.396992
+0.374814
+0.370375
+
+###################################################
+**		ArrayLength = 2500000		##
+###################################################
+testing sequential
+averagetime:1.790944
+
+Using Parallel. threads=2
+
+testing openmp
+averagetime:1.661876
+
+testing regular openmp, num experiments:10
+averagetime:0.916646
+
+\ntesting MPI:\n
+3.093201
+4.235912
+4.253288
+4.934432
+4.416387
+4.569785
+4.299007
+4.206011
+3.062508
+3.446922
+
+\ntesting MPI Regular:\n
+1.810250
+1.788232
+1.773340
+1.822851
+1.793391
+1.789567
+1.789722
+1.788840
+1.784591
+1.773418
+
+###################################################
+**		ArrayLength = 12500000		##
+###################################################
+testing sequential
+averagetime:9.828215
+
+Using Parallel. threads=2
+
+testing openmp
+averagetime:9.843828
+
+testing regular openmp, num experiments:10
+averagetime:4.843381
+
+\ntesting MPI:\n
+46.708735
+63.762261
+59.874654
+60.298900
+51.773997
+55.484825
+70.642256
+27.882599
+42.194192
+32.884733
+
+\ntesting MPI Regular:\n
+testing regular MPI, length:12500000
+6.367345
+6.402245
+6.267422
+6.459061
+6.341941
+6.244249
+6.431516
+6.357850
+6.354169
+6.256105
+
+###################################################
+**		ArrayLength = 100000		##
+###################################################
+
+Using Parallel. threads=4
+
+testing openmp
+averagetime:0.043664
+
+testing regular openmp, num experiments:10
+averagetime:0.014107
+
+\ntesting MPI:\n
+0.022613
+0.044758
+0.036085
+0.028748
+0.026236
+0.027236
+0.023738
+0.037663
+0.022440
+0.030715
+
+\ntesting MPI Regular:\n
+testing regular MPI, length:100000
+0.015478
+0.013611
+0.014170
+0.015768
+0.015937
+0.014388
+0.013835
+0.014205
+0.015479
+0.014370
+
+###################################################
+**		ArrayLength = 500000		##
+###################################################
+
+Using Parallel. threads=4
+
+testing openmp
+averagetime:0.202142
+
+testing regular openmp, num experiments:10
+averagetime:0.084844
+
+\ntesting MPI:\n
+0.096129
+0.160490
+0.121092
+0.170219
+0.133834
+0.100832
+0.246134
+0.193283
+0.137315
+0.137800
+
+\ntesting MPI Regular:\n
+testing regular MPI, length:500000
+0.066360
+0.065683
+0.067455
+0.066140
+0.067351
+0.068034
+0.064616
+0.066231
+0.067126
+0.068337
+###################################################
+**		ArrayLength = 2500000		##
+###################################################
+
+Using Parallel. threads=4
+
+testing openmp
+averagetime:1.014075
+
+testing regular openmp, num experiments:10
+averagetime:0.452091
+
+\ntesting MPI:\n
+0.699985
+1.063002
+1.459142
+1.106061
+1.161006
+1.367961
+0.940371
+1.132966
+0.821126
+1.069874
+
+\ntesting MPI Regular:\n
+0.343031
+0.352616
+0.344453
+0.341487
+0.339150
+0.342826
+0.338176
+0.332462
+0.338769
+0.340609
+
+###################################################
+**		ArrayLength = 12500000		##
+###################################################
+
+Using Parallel. threads=4
+
+testing openmp
+averagetime:5.895949
+
+testing regular openmp, num experiments:10
+averagetime:2.404863
+
+\ntesting MPI:\n
+11.357817
+19.034932
+14.689230
+18.380943
+12.718851
+13.165234
+16.269196
+12.853076
+19.650893
+12.466873
+
+\ntesting MPI Regular:\n
+1.764948
+1.777289
+1.712805
+1.759126
+1.715944
+1.764208
+1.781208
+1.780909
+1.784684
+1.815852
+
+
