@@ -10,7 +10,8 @@ using namespace std;
 
 
 long arrayLengths =10000000;
-int experiments = 3;
+int experiments = 10;
+bool testSeq = true;
 
 void testSequential();
 void testOpenMP();
@@ -22,9 +23,16 @@ int main( int argc, const char* argv[])
 		int argElems = std::stoi(argv[1]);
 		printf("ArrayLength = %d\n", argElems);
 		arrayLengths = argElems;
+
+		if(argc >2){
+			testSeq = (std::stoi(argv[2]) == 1);
+		}
 	}
 
-	testSequential();
+	if(testSequential){
+		testSequential();
+	}
+	
 
 	printf("\nUsing Parallel. threads=%d\n\n",omp_get_max_threads());
     testOpenMP();

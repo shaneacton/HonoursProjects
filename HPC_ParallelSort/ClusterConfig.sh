@@ -12,7 +12,7 @@
 
 # The line below indicates the wall time your job will need, 10 hours for example. NB, this is a mandatory directive!
 # Note that 10:00 is 10 minutes
-#SBATCH --time=10:00
+#SBATCH --time=15:00
 
 # The line below means your job will be canceled if it consumes more than 4GB of RAM per requested core. Max 9000.
 
@@ -26,7 +26,7 @@
 # NB, for more information read https://computing.llnl.gov/linux/slurm/sbatch.html
 
 # Use module to gain easy access to software, typing module avail lists all packages.
-numThreads=4;
+numThreads=8;
 
 module load mpi/openmpi-4.0.1
 
@@ -48,12 +48,28 @@ for threadCount in $( seq 2 $numThreads ); do
 		for i in {1..4}; do
 			#echo 'num elements:' $numElements;
 
-			./main_cpp $numElements
+			if [ $threadCount == 2 ];
+			then
+				./main_cpp $numElements 1
+			fi;
+
+			if [ $threadCount != 2 ];
+			then
+				./main_cpp $numElements 0
+			fi;
+
 			./main_OMP $numElements
 
-			for experiment in {0..3}; do
+			echo "\ntesting MPI:\n"
 
+			for experiment in {0..10}; do
 				mpirun -np $threadCount main_MPI $numElements $experiment
+
+			done;
+
+			echo "\ntesting MPI Regular:\n"
+
+			for experiment in {0..10}; do
 				mpirun -np $threadCount main_MPIReg $numElements $experiment
 
 			done;
@@ -65,4 +81,4 @@ for threadCount in $( seq 2 $numThreads ); do
 	fi;
 done;
 
-
+echo "experiments complete"
