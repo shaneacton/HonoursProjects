@@ -63,14 +63,14 @@ for threadCount in $( seq 2 $numThreads ); do
 			echo "\ntesting MPI:\n"
 
 			for experiment in {0..10}; do
-				mpirun -np $threadCount main_MPI $numElements $experiment
+				mpirun -np $threadCount --mca btl_openib_warn_nonexistent_if 0 main_MPI $numElements $experiment
 
 			done;
 
 			echo "\ntesting MPI Regular:\n"
 
 			for experiment in {0..10}; do
-				mpirun -np $threadCount main_MPIReg $numElements $experiment
+				mpirun -np $threadCount --mca btl_openib_warn_nonexistent_if 0 main_MPIReg $numElements $experiment
 
 			done;
 
