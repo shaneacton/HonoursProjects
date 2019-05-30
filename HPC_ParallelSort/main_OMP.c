@@ -40,8 +40,8 @@ void testRegOpenMP(){
 		timeTotal+=time;
 
 		//printArray(arr,numElements);
-		printf("sorted:%d | " , isSorted(arr, numElements));
-	    printf("regular openMP time:%f\n",time);
+		//printf("sorted:%d | " , isSorted(arr, numElements));
+	    //printf("regular openMP time:%f\n",time);
 	    
 	}
 

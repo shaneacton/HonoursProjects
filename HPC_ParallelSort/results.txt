@@ -1,0 +1,448 @@
+ArrayLength = 100000
+testing sequential
+sorted:1 | sequential time:0.053143
+sorted:1 | sequential time:0.053485
+sorted:1 | sequential time:0.053756
+sorted:1 | sequential time:0.053335
+sorted:1 | sequential time:0.055192
+sorted:1 | sequential time:0.053478
+sorted:1 | sequential time:0.055024
+sorted:1 | sequential time:0.055357
+sorted:1 | sequential time:0.054705
+sorted:1 | sequential time:0.056577
+averagetime:0.054405
+
+Using Parallel. threads=2
+
+testing openmp
+sorted:1 | openMP time:0.062314
+sorted:1 | openMP time:0.060697
+sorted:1 | openMP time:0.063148
+sorted:1 | openMP time:0.062954
+sorted:1 | openMP time:0.063749
+sorted:1 | openMP time:0.063334
+sorted:1 | openMP time:0.063096
+sorted:1 | openMP time:0.065245
+sorted:1 | openMP time:0.063353
+sorted:1 | openMP time:0.063665
+averagetime:0.063155
+
+testing regular openmp, num experiments:10
+sorted:1 | regular openMP time:0.031634
+sorted:1 | regular openMP time:0.028261
+sorted:1 | regular openMP time:0.027059
+sorted:1 | regular openMP time:0.030685
+sorted:1 | regular openMP time:0.029784
+sorted:1 | regular openMP time:0.029644
+sorted:1 | regular openMP time:0.029103
+sorted:1 | regular openMP time:0.027654
+sorted:1 | regular openMP time:0.030267
+sorted:1 | regular openMP time:0.030710
+averagetime:0.029480
+
+\ntesting MPI:\n
+sorted:1 | 
+regular MPI time:0.036979
+[1559222586.288073] [srvcnthpc600:59142:0]          mpool.c:38   UCX  WARN  object 0x26e8f80 was not returned to mpool ucp_requests
+[1559222586.289390] [srvcnthpc600:59143:0]          mpool.c:38   UCX  WARN  object 0x1db71c0 was not returned to mpool ucp_requests
+sorted:1 | 
+regular MPI time:0.040213
+[1559222587.566190] [srvcnthpc600:59177:0]          mpool.c:38   UCX  WARN  object 0x27d0100 was not returned to mpool ucp_requests
+[1559222587.567601] [srvcnthpc600:59176:0]          mpool.c:38   UCX  WARN  object 0x20d1040 was not returned to mpool ucp_requests
+sorted:1 | 
+regular MPI time:0.039695
+[1559222588.835607] [srvcnthpc600:59224:0]          mpool.c:38   UCX  WARN  object 0x11d1140 was not returned to mpool ucp_requests
+[1559222588.835611] [srvcnthpc600:59223:0]          mpool.c:38   UCX  WARN  object 0x2441180 was not returned to mpool ucp_requests
+sorted:1 | 
+regular MPI time:0.023478
+[1559222590.052054] [srvcnthpc600:59244:0]          mpool.c:38   UCX  WARN  object 0x2156200 was not returned to mpool ucp_requests
+[1559222590.051982] [srvcnthpc600:59243:0]          mpool.c:38   UCX  WARN  object 0x17e9180 was not returned to mpool ucp_requests
+sorted:1 | 
+regular MPI time:0.024128
+[1559222591.292243] [srvcnthpc600:59266:0]          mpool.c:38   UCX  WARN  object 0x22c4040 was not returned to mpool ucp_requests
+[1559222591.293878] [srvcnthpc600:59267:0]          mpool.c:38   UCX  WARN  object 0x1547100 was not returned to mpool ucp_requests
+--------------------------------------------------------------------------
+A system call failed during shared memory initialization that should
+not have.  It is likely that your MPI job will now either abort or
+experience performance degradation.
+
+  Local host:  srvcnthpc600.uct.ac.za
+  System call: open(2) 
+  Error:       Permission denied (errno 13)
+--------------------------------------------------------------------------
+sorted:1 | 
+regular MPI time:0.032174
+[1559222592.552049] [srvcnthpc600:59287:0]          mpool.c:38   UCX  WARN  object 0x11ba0c0 was not returned to mpool ucp_requests
+[1559222592.552535] [srvcnthpc600:59286:0]          mpool.c:38   UCX  WARN  object 0x169d180 was not returned to mpool ucp_requests
+[srvcnthpc600.uct.ac.za:59280] 1 more process has sent help message help-opal-shmem-mmap.txt / sys call fail
+[srvcnthpc600.uct.ac.za:59280] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+sorted:1 | 
+regular MPI time:0.026684
+[1559222593.759755] [srvcnthpc600:59306:0]          mpool.c:38   UCX  WARN  object 0x264b080 was not returned to mpool ucp_requests
+[1559222593.760118] [srvcnthpc600:59307:0]          mpool.c:38   UCX  WARN  object 0x1bb82c0 was not returned to mpool ucp_requests
+sorted:1 | 
+regular MPI time:0.035169
+[1559222594.981835] [srvcnthpc600:59327:0]          mpool.c:38   UCX  WARN  object 0x11400c0 was not returned to mpool ucp_requests
+[1559222594.981916] [srvcnthpc600:59326:0]          mpool.c:38   UCX  WARN  object 0x1a20180 was not returned to mpool ucp_requests
+sorted:1 | 
+regular MPI time:0.036797
+[1559222596.206160] [srvcnthpc600:59347:0]          mpool.c:38   UCX  WARN  object 0x128c0c0 was not returned to mpool ucp_requests
+[1559222596.206626] [srvcnthpc600:59346:0]          mpool.c:38   UCX  WARN  object 0x14440c0 was not returned to mpool ucp_requests
+sorted:1 | 
+regular MPI time:0.030885
+[1559222597.424250] [srvcnthpc600:59366:0]          mpool.c:38   UCX  WARN  object 0x9f0140 was not returned to mpool ucp_requests
+[1559222597.425546] [srvcnthpc600:59367:0]          mpool.c:38   UCX  WARN  object 0xce40c0 was not returned to mpool ucp_requests
+sorted:1 | 
+regular MPI time:0.041266
+[1559222598.645351] [srvcnthpc600:59387:0]          mpool.c:38   UCX  WARN  object 0x120a180 was not returned to mpool ucp_requests
+[1559222598.647363] [srvcnthpc600:59386:0]          mpool.c:38   UCX  WARN  object 0x1d78280 was not returned to mpool ucp_requests
+\ntesting MPI Regular:\n
+testing regular MPI, length:100000
+sorted:1 | regular MPI time:0.022407, process:0
+--------------------------------------------------------------------------
+A system call failed during shared memory initialization that should
+not have.  It is likely that your MPI job will now either abort or
+experience performance degradation.
+
+  Local host:  srvcnthpc600.uct.ac.za
+  System call: open(2) 
+  Error:       Permission denied (errno 13)
+--------------------------------------------------------------------------
+testing regular MPI, length:100000
+sorted:1 | regular MPI time:0.021598, process:0
+[srvcnthpc600.uct.ac.za:59420] 1 more process has sent help message help-opal-shmem-mmap.txt / sys call fail
+[srvcnthpc600.uct.ac.za:59420] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+testing regular MPI, length:100000
+sorted:1 | regular MPI time:0.022106, process:0
+testing regular MPI, length:100000
+sorted:1 | regular MPI time:0.022031, process:0
+testing regular MPI, length:100000
+sorted:1 | regular MPI time:0.021863, process:0
+testing regular MPI, length:100000
+sorted:1 | regular MPI time:0.022280, process:0
+testing regular MPI, length:100000
+sorted:1 | regular MPI time:0.021598, process:0
+testing regular MPI, length:100000
+sorted:1 | regular MPI time:0.021792, process:0
+testing regular MPI, length:100000
+sorted:1 | regular MPI time:0.021204, process:0
+testing regular MPI, length:100000
+sorted:1 | regular MPI time:0.021343, process:0
+testing regular MPI, length:100000
+sorted:1 | regular MPI time:0.021742, process:0
+ArrayLength = 500000
+testing sequential
+sorted:1 | sequential time:0.330003
+sorted:1 | sequential time:0.317530
+sorted:1 | sequential time:0.330222
+sorted:1 | sequential time:0.308278
+sorted:1 | sequential time:0.305031
+sorted:1 | sequential time:0.323090
+sorted:1 | sequential time:0.306675
+sorted:1 | sequential time:0.319512
+sorted:1 | sequential time:0.376243
+sorted:1 | sequential time:0.301765
+averagetime:0.321835
+
+Using Parallel. threads=2
+
+testing openmp
+sorted:1 | openMP time:0.339260
+sorted:1 | openMP time:0.335647
+sorted:1 | openMP time:0.339729
+sorted:1 | openMP time:0.325710
+sorted:1 | openMP time:0.329212
+sorted:1 | openMP time:0.338741
+sorted:1 | openMP time:0.325890
+sorted:1 | openMP time:0.331751
+sorted:1 | openMP time:0.327443
+sorted:1 | openMP time:0.331333
+averagetime:0.332472
+
+testing regular openmp, num experiments:10
+sorted:1 | regular openMP time:0.169424
+sorted:1 | regular openMP time:0.168781
+sorted:1 | regular openMP time:0.167126
+sorted:1 | regular openMP time:0.168326
+sorted:1 | regular openMP time:0.163977
+sorted:1 | regular openMP time:0.160670
+sorted:1 | regular openMP time:0.171150
+sorted:1 | regular openMP time:0.159623
+sorted:1 | regular openMP time:0.168592
+sorted:1 | regular openMP time:0.166279
+averagetime:0.166395
+
+\ntesting MPI:\n
+sorted:1 | 
+regular MPI time:0.269604
+[1559222622.471581] [srvcnthpc600:59964:0]          mpool.c:38   UCX  WARN  object 0x1432300 was not returned to mpool ucp_requests
+[1559222622.471567] [srvcnthpc600:59963:0]          mpool.c:38   UCX  WARN  object 0x2787340 was not returned to mpool ucp_requests
+sorted:1 | 
+regular MPI time:0.186116
+[1559222623.896920] [srvcnthpc600:60035:0]          mpool.c:38   UCX  WARN  object 0xbd33c0 was not returned to mpool ucp_requests
+[1559222623.898551] [srvcnthpc600:60034:0]          mpool.c:38   UCX  WARN  object 0x13193c0 was not returned to mpool ucp_requests
+sorted:1 | 
+regular MPI time:0.178144
+[1559222625.531922] [srvcnthpc600:60093:0]          mpool.c:38   UCX  WARN  object 0x23de340 was not returned to mpool ucp_requests
+[1559222625.532182] [srvcnthpc600:60095:0]          mpool.c:38   UCX  WARN  object 0xa2e3c0 was not returned to mpool ucp_requests
+sorted:1 | 
+regular MPI time:0.336535
+[1559222627.321003] [srvcnthpc600:60159:0]          mpool.c:38   UCX  WARN  object 0x13bc3c0 was not returned to mpool ucp_requests
+[1559222627.321427] [srvcnthpc600:60160:0]          mpool.c:38   UCX  WARN  object 0xc78380 was not returned to mpool ucp_requests
+sorted:1 | 
+regular MPI time:0.496793
+[1559222629.502321] [srvcnthpc600:60181:0]          mpool.c:38   UCX  WARN  object 0x24615c0 was not returned to mpool ucp_requests
+[1559222629.507432] [srvcnthpc600:60180:0]          mpool.c:38   UCX  WARN  object 0x102d400 was not returned to mpool ucp_requests
+sorted:1 | 
+regular MPI time:0.397729
+[1559222631.313885] [srvcnthpc600:60250:0]          mpool.c:38   UCX  WARN  object 0xf042c0 was not returned to mpool ucp_requests
+[1559222631.313991] [srvcnthpc600:60249:0]          mpool.c:38   UCX  WARN  object 0x268c340 was not returned to mpool ucp_requests
+sorted:1 | 
+regular MPI time:0.481824
+[1559222633.300035] [srvcnthpc600:60282:0]          mpool.c:38   UCX  WARN  object 0x101f440 was not returned to mpool ucp_requests
+[1559222633.301525] [srvcnthpc600:60283:0]          mpool.c:38   UCX  WARN  object 0xce93c0 was not returned to mpool ucp_requests
+sorted:1 | 
+regular MPI time:0.253854
+[1559222635.130284] [srvcnthpc600:60303:0]          mpool.c:38   UCX  WARN  object 0x12bc500 was not returned to mpool ucp_requests
+[1559222635.132871] [srvcnthpc600:60304:0]          mpool.c:38   UCX  WARN  object 0xa0a380 was not returned to mpool ucp_requests
+sorted:1 | 
+regular MPI time:0.439496
+[1559222636.951656] [srvcnthpc600:60372:0]          mpool.c:38   UCX  WARN  object 0xdc7580 was not returned to mpool ucp_requests
+[1559222636.954340] [srvcnthpc600:60371:0]          mpool.c:38   UCX  WARN  object 0x23ea340 was not returned to mpool ucp_requests
+sorted:1 | 
+regular MPI time:0.141291
+[1559222638.435831] [srvcnthpc600:60391:0]          mpool.c:38   UCX  WARN  object 0x14c0500 was not returned to mpool ucp_requests
+[1559222638.436168] [srvcnthpc600:60392:0]          mpool.c:38   UCX  WARN  object 0x240f440 was not returned to mpool ucp_requests
+sorted:1 | 
+regular MPI time:0.202123
+[1559222639.857816] [srvcnthpc600:60414:0]          mpool.c:38   UCX  WARN  object 0x14ab340 was not returned to mpool ucp_requests
+[1559222639.858325] [srvcnthpc600:60415:0]          mpool.c:38   UCX  WARN  object 0x1058480 was not returned to mpool ucp_requests
+\ntesting MPI Regular:\n
+testing regular MPI, length:500000
+sorted:1 | regular MPI time:0.116739, process:0
+testing regular MPI, length:500000
+sorted:1 | regular MPI time:0.116913, process:0
+testing regular MPI, length:500000
+sorted:1 | regular MPI time:0.115266, process:0
+testing regular MPI, length:500000
+sorted:1 | regular MPI time:0.116066, process:0
+testing regular MPI, length:500000
+sorted:1 | regular MPI time:0.117767, process:0
+testing regular MPI, length:500000
+sorted:1 | regular MPI time:0.120102, process:0
+testing regular MPI, length:500000
+sorted:1 | regular MPI time:0.117770, process:0
+testing regular MPI, length:500000
+sorted:1 | regular MPI time:0.118576, process:0
+testing regular MPI, length:500000
+sorted:1 | regular MPI time:0.115911, process:0
+testing regular MPI, length:500000
+sorted:1 | regular MPI time:0.117080, process:0
+testing regular MPI, length:500000
+sorted:1 | regular MPI time:0.116782, process:0
+ArrayLength = 2500000
+testing sequential
+sorted:1 | sequential time:1.798153
+sorted:1 | sequential time:1.776020
+sorted:1 | sequential time:1.742842
+sorted:1 | sequential time:1.728442
+sorted:1 | sequential time:1.783984
+sorted:1 | sequential time:1.826778
+sorted:1 | sequential time:1.822860
+sorted:1 | sequential time:1.792728
+sorted:1 | sequential time:1.838648
+sorted:1 | sequential time:1.821473
+averagetime:1.793193
+
+Using Parallel. threads=2
+
+testing openmp
+sorted:1 | openMP time:1.690525
+sorted:1 | openMP time:1.738116
+sorted:1 | openMP time:1.691477
+sorted:1 | openMP time:1.717234
+sorted:1 | openMP time:1.712556
+sorted:1 | openMP time:1.718776
+sorted:1 | openMP time:1.742528
+sorted:1 | openMP time:1.725262
+sorted:1 | openMP time:1.704070
+sorted:1 | openMP time:1.696874
+averagetime:1.713742
+
+testing regular openmp, num experiments:10
+sorted:1 | regular openMP time:0.916536
+sorted:1 | regular openMP time:0.908917
+sorted:1 | regular openMP time:0.919611
+sorted:1 | regular openMP time:0.912155
+sorted:1 | regular openMP time:0.912737
+sorted:1 | regular openMP time:0.924140
+sorted:1 | regular openMP time:0.929525
+sorted:1 | regular openMP time:0.924201
+sorted:1 | regular openMP time:0.910730
+sorted:1 | regular openMP time:0.930256
+averagetime:0.918881
+
+\ntesting MPI:\n
+sorted:1 | 
+regular MPI time:1.029994
+[1559222706.957962] [srvcnthpc600:60812:0]          mpool.c:38   UCX  WARN  object 0x1039380 was not returned to mpool ucp_requests
+[1559222706.958984] [srvcnthpc600:60811:0]          mpool.c:38   UCX  WARN  object 0xfb3380 was not returned to mpool ucp_requests
+sorted:1 | 
+regular MPI time:1.443497
+[1559222709.791731] [srvcnthpc600:60832:0]          mpool.c:38   UCX  WARN  object 0xd4d380 was not returned to mpool ucp_requests
+[1559222709.793242] [srvcnthpc600:60833:0]          mpool.c:38   UCX  WARN  object 0x8b3380 was not returned to mpool ucp_requests
+sorted:1 | 
+regular MPI time:1.441666
+[1559222712.725658] [srvcnthpc600:60854:0]          mpool.c:38   UCX  WARN  object 0x132a400 was not returned to mpool ucp_requests
+[1559222712.725805] [srvcnthpc600:60853:0]          mpool.c:38   UCX  WARN  object 0xd1c540 was not returned to mpool ucp_requests
+sorted:1 | 
+regular MPI time:1.655849
+[1559222715.773319] [srvcnthpc600:60875:0]          mpool.c:38   UCX  WARN  object 0xcfa340 was not returned to mpool ucp_requests
+[1559222715.773600] [srvcnthpc600:60876:0]          mpool.c:38   UCX  WARN  object 0x1ac7440 was not returned to mpool ucp_requests
+sorted:1 | 
+regular MPI time:1.474750
+[1559222718.602228] [srvcnthpc600:60897:0]          mpool.c:38   UCX  WARN  object 0x25593c0 was not returned to mpool ucp_requests
+[1559222718.602714] [srvcnthpc600:60898:0]          mpool.c:38   UCX  WARN  object 0xe39440 was not returned to mpool ucp_requests
+sorted:1 | 
+regular MPI time:1.560189
+[1559222721.558450] [srvcnthpc600:60919:0]          mpool.c:38   UCX  WARN  object 0xd97340 was not returned to mpool ucp_requests
+[1559222721.559366] [srvcnthpc600:60920:0]          mpool.c:38   UCX  WARN  object 0x2761480 was not returned to mpool ucp_requests
+sorted:1 | 
+regular MPI time:1.450082
+[1559222724.396807] [srvcnthpc600:60941:0]          mpool.c:38   UCX  WARN  object 0x2591380 was not returned to mpool ucp_requests
+[1559222724.397603] [srvcnthpc600:60940:0]          mpool.c:38   UCX  WARN  object 0x1486400 was not returned to mpool ucp_requests
+sorted:1 | 
+regular MPI time:1.408796
+[1559222727.202520] [srvcnthpc600:60961:0]          mpool.c:38   UCX  WARN  object 0x265d440 was not returned to mpool ucp_requests
+[1559222727.204319] [srvcnthpc600:60962:0]          mpool.c:38   UCX  WARN  object 0x12e3380 was not returned to mpool ucp_requests
+sorted:1 | 
+regular MPI time:1.029186
+[1559222729.620850] [srvcnthpc600:60984:0]          mpool.c:38   UCX  WARN  object 0xadd380 was not returned to mpool ucp_requests
+[1559222729.622849] [srvcnthpc600:60983:0]          mpool.c:38   UCX  WARN  object 0x2227340 was not returned to mpool ucp_requests
+sorted:1 | 
+regular MPI time:1.165091
+[1559222732.161394] [srvcnthpc600:61005:0]          mpool.c:38   UCX  WARN  object 0xfaa380 was not returned to mpool ucp_requests
+[1559222732.161708] [srvcnthpc600:61004:0]          mpool.c:38   UCX  WARN  object 0x19b9400 was not returned to mpool ucp_requests
+sorted:1 | 
+regular MPI time:1.327011
+[1559222734.843597] [srvcnthpc600:61025:0]          mpool.c:38   UCX  WARN  object 0x1899540 was not returned to mpool ucp_requests
+[1559222734.846373] [srvcnthpc600:61026:0]          mpool.c:38   UCX  WARN  object 0x1cf3380 was not returned to mpool ucp_requests
+\ntesting MPI Regular:\n
+testing regular MPI, length:2500000
+sorted:1 | regular MPI time:0.585570, process:0
+testing regular MPI, length:2500000
+sorted:1 | regular MPI time:0.597242, process:0
+testing regular MPI, length:2500000
+sorted:1 | regular MPI time:0.588107, process:0
+testing regular MPI, length:2500000
+sorted:1 | regular MPI time:0.598353, process:0
+testing regular MPI, length:2500000
+sorted:1 | regular MPI time:0.610771, process:0
+testing regular MPI, length:2500000
+sorted:1 | regular MPI time:0.592850, process:0
+testing regular MPI, length:2500000
+sorted:1 | regular MPI time:0.585347, process:0
+testing regular MPI, length:2500000
+sorted:1 | regular MPI time:0.592074, process:0
+testing regular MPI, length:2500000
+sorted:1 | regular MPI time:0.596672, process:0
+testing regular MPI, length:2500000
+sorted:1 | regular MPI time:0.590334, process:0
+testing regular MPI, length:2500000
+sorted:1 | regular MPI time:0.585594, process:0
+ArrayLength = 12500000
+testing sequential
+sorted:1 | sequential time:9.703933
+sorted:1 | sequential time:9.511884
+sorted:1 | sequential time:10.060747
+sorted:1 | sequential time:9.855827
+sorted:1 | sequential time:9.842202
+sorted:1 | sequential time:9.900602
+sorted:1 | sequential time:9.720195
+sorted:1 | sequential time:9.942688
+sorted:1 | sequential time:10.031151
+sorted:1 | sequential time:9.651027
+averagetime:9.822025
+
+Using Parallel. threads=2
+
+testing openmp
+sorted:1 | openMP time:9.770668
+sorted:1 | openMP time:9.436045
+sorted:1 | openMP time:9.884663
+sorted:1 | openMP time:9.671176
+sorted:1 | openMP time:9.542060
+sorted:1 | openMP time:9.708679
+sorted:1 | openMP time:9.686989
+sorted:1 | openMP time:9.604905
+sorted:1 | openMP time:9.587786
+sorted:1 | openMP time:9.650659
+averagetime:9.654363
+
+testing regular openmp, num experiments:10
+sorted:1 | regular openMP time:4.786358
+sorted:1 | regular openMP time:4.772065
+sorted:1 | regular openMP time:4.833312
+sorted:1 | regular openMP time:4.738482
+sorted:1 | regular openMP time:4.792499
+sorted:1 | regular openMP time:4.743070
+sorted:1 | regular openMP time:4.743870
+sorted:1 | regular openMP time:4.780346
+sorted:1 | regular openMP time:4.708795
+sorted:1 | regular openMP time:4.834662
+averagetime:4.773346
+
+\ntesting MPI:\n
+sorted:1 | 
+regular MPI time:32.018945
+[1559223055.461733] [srvcnthpc600:65412:0]          mpool.c:38   UCX  WARN  object 0xacb480 was not returned to mpool ucp_requests
+[1559223055.465585] [srvcnthpc600:65411:0]          mpool.c:38   UCX  WARN  object 0xcd9440 was not returned to mpool ucp_requests
+sorted:1 | 
+regular MPI time:42.825357
+[1559223101.757911] [srvcnthpc600:363  :0]          mpool.c:38   UCX  WARN  object 0x1da8480 was not returned to mpool ucp_requests
+[1559223101.758004] [srvcnthpc600:362  :0]          mpool.c:38   UCX  WARN  object 0x246b440 was not returned to mpool ucp_requests
+sorted:1 | 
+regular MPI time:34.142146
+[1559223138.397535] [srvcnthpc600:573  :0]          mpool.c:38   UCX  WARN  object 0x25cd4c0 was not returned to mpool ucp_requests
+[1559223138.398979] [srvcnthpc600:572  :0]          mpool.c:38   UCX  WARN  object 0x1bb5380 was not returned to mpool ucp_requests
+--------------------------------------------------------------------------
+A system call failed during shared memory initialization that should
+not have.  It is likely that your MPI job will now either abort or
+experience performance degradation.
+
+  Local host:  srvcnthpc600.uct.ac.za
+  System call: open(2) 
+  Error:       Permission denied (errno 13)
+--------------------------------------------------------------------------
+[srvcnthpc600.uct.ac.za:00725] 1 more process has sent help message help-opal-shmem-mmap.txt / sys call fail
+[srvcnthpc600.uct.ac.za:00725] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+sorted:1 | 
+regular MPI time:40.294838
+[1559223181.885026] [srvcnthpc600:732  :0]          mpool.c:38   UCX  WARN  object 0xb9c2c0 was not returned to mpool ucp_requests
+[1559223181.886499] [srvcnthpc600:731  :0]          mpool.c:38   UCX  WARN  object 0x95c2c0 was not returned to mpool ucp_requests
+sorted:1 | 
+regular MPI time:25.631032
+[1559223210.954713] [srvcnthpc600:905  :0]          mpool.c:38   UCX  WARN  object 0x190d480 was not returned to mpool ucp_requests
+[1559223210.966870] [srvcnthpc600:904  :0]          mpool.c:38   UCX  WARN  object 0xef4580 was not returned to mpool ucp_requests
+sorted:1 | 
+regular MPI time:36.557313
+[1559223250.597656] [srvcnthpc600:1120 :0]          mpool.c:38   UCX  WARN  object 0x16d44c0 was not returned to mpool ucp_requests
+[1559223250.604966] [srvcnthpc600:1119 :0]          mpool.c:38   UCX  WARN  object 0x1087440 was not returned to mpool ucp_requests
+sorted:1 | 
+regular MPI time:37.368733
+[1559223291.023709] [srvcnthpc600:1201 :0]          mpool.c:38   UCX  WARN  object 0x10645c0 was not returned to mpool ucp_requests
+[1559223291.024480] [srvcnthpc600:1200 :0]          mpool.c:38   UCX  WARN  object 0x1800480 was not returned to mpool ucp_requests
+sorted:1 | 
+regular MPI time:26.399916
+[1559223319.883614] [srvcnthpc600:1337 :0]          mpool.c:38   UCX  WARN  object 0x1ddc380 was not returned to mpool ucp_requests
+[1559223319.892559] [srvcnthpc600:1336 :0]          mpool.c:38   UCX  WARN  object 0x23a0400 was not returned to mpool ucp_requests
+sorted:1 | 
+regular MPI time:42.560791
+[1559223365.917140] [srvcnthpc600:1472 :0]          mpool.c:38   UCX  WARN  object 0xa04480 was not returned to mpool ucp_requests
+[1559223365.924500] [srvcnthpc600:1471 :0]          mpool.c:38   UCX  WARN  object 0x12a3400 was not returned to mpool ucp_requests
+sorted:1 | 
+regular MPI time:32.983943
+[1559223402.100379] [srvcnthpc600:1613 :0]          mpool.c:38   UCX  WARN  object 0x8e4440 was not returned to mpool ucp_requests
+[1559223402.105867] [srvcnthpc600:1612 :0]          mpool.c:38   UCX  WARN  object 0x23433c0 was not returned to mpool ucp_requests
+sorted:1 | 
+regular MPI time:56.369851

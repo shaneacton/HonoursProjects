@@ -214,7 +214,7 @@ int mpiSort(int * arr, long N)
 
     free((void *) fullArr);
 
-    printf("regular MPI time:%f\n",(end-start));
+    printf("MPI time:%f\n",(end-start));
   }
 
   //printf("4r:%d\n",rank);

@@ -36,8 +36,13 @@ make main_OMP
 make main_MPI
 make main_MPIReg
 
+for experiment in {0..9}; do
+	mpirun -np 2 --mca btl_openib_warn_nonexistent_if 0 main_MPIReg 12500000 $experiment
 
-for threadCount in $( seq 2 $numThreads ); do
+done;
+
+
+for threadCount in $( seq 4 $numThreads ); do
 	if [ $((threadCount%2)) == 0 -a $threadCount != 6 ];
 	#if [ $threadCount != 6 ];
 	then
@@ -62,14 +67,14 @@ for threadCount in $( seq 2 $numThreads ); do
 
 			echo "\ntesting MPI:\n"
 
-			for experiment in {0..10}; do
+			for experiment in {0..9}; do
 				mpirun -np $threadCount --mca btl_openib_warn_nonexistent_if 0 main_MPI $numElements $experiment
 
 			done;
 
 			echo "\ntesting MPI Regular:\n"
 
-			for experiment in {0..10}; do
+			for experiment in {0..9}; do
 				mpirun -np $threadCount --mca btl_openib_warn_nonexistent_if 0 main_MPIReg $numElements $experiment
 
 			done;

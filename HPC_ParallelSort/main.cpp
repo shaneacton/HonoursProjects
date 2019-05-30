@@ -51,8 +51,8 @@ void testSequential(){
 		double time = omp_get_wtime() - start_time;
 		timeTotal+=time;
 
-		printf("sorted:%d | " , ArrayUtils::isSorted(SequentialSort::array, SequentialSort::numElements));
-	    printf("sequential time:%f\n",time);
+		//printf("sorted:%d | " , ArrayUtils::isSorted(SequentialSort::array, SequentialSort::numElements));
+	    //printf("sequential time:%f\n",time);
 	}
 	printf("averagetime:%f\n",(timeTotal/experiments));
 
@@ -71,8 +71,8 @@ void testOpenMP(){
 		double time = omp_get_wtime() - start_time;
 		timeTotal+=time;
 
-		printf("sorted:%d | " , ArrayUtils::isSorted(OpenMPSort::array, OpenMPSort::numElements));
-	    printf("openMP time:%f\n",time);
+		//printf("sorted:%d | " , ArrayUtils::isSorted(OpenMPSort::array, OpenMPSort::numElements));
+	    //printf("openMP time:%f\n",time);
 	    
 	}
 
