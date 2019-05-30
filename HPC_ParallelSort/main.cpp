@@ -21,7 +21,7 @@ int main( int argc, const char* argv[])
 {
 	if(argc>1){
 		int argElems = std::stoi(argv[1]);
-		printf("ArrayLength = %d\n", argElems);
+		printf("###################################################\n**\t\tArrayLength = %d\t\t##\n###################################################\n", argElems);
 		arrayLengths = argElems;
 
 		if(argc >2){
@@ -29,7 +29,7 @@ int main( int argc, const char* argv[])
 		}
 	}
 
-	if(testSequential){
+	if(testSeq){
 		testSequential();
 	}
 	

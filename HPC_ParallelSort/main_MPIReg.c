@@ -57,8 +57,10 @@ void testRegMPI(){
 	//printArray(arr,numElements);
 
 	if(myId == 0){
-		printf("sorted:%d | " , isSorted(arr, numElements));
-	    printf("regular MPI time:%f, process:%d\n",time,myId);
+		if(!isSorted(arr, numElements)){
+			printf("WARNING!!! array not sorted\n");
+		}
+	    printf("%f\n",time);
 	}  
 
 	free(arr);

@@ -208,13 +208,14 @@ int mpiSort(int * arr, long N)
 
     //printf("3.5r:%d\n",rank);
 
-    printf("sorted:%d | \n" , isSorted(fullArr, N));
+    if(!isSorted(fullArr, N)){
+      printf("WARNING!!! array not sorted\n");
+    }
 
-    //printf("3.6r:%d\n",rank);
 
     free((void *) fullArr);
 
-    printf("MPI time:%f\n",(end-start));
+    printf("%f\n",(end-start));
   }
 
   //printf("4r:%d\n",rank);

@@ -12,7 +12,7 @@
 
 # The line below indicates the wall time your job will need, 10 hours for example. NB, this is a mandatory directive!
 # Note that 10:00 is 10 minutes
-#SBATCH --time=15:00
+#SBATCH --time=30:00
 
 # The line below means your job will be canceled if it consumes more than 4GB of RAM per requested core. Max 9000.
 
@@ -36,13 +36,7 @@ make main_OMP
 make main_MPI
 make main_MPIReg
 
-for experiment in {0..9}; do
-	mpirun -np 2 --mca btl_openib_warn_nonexistent_if 0 main_MPIReg 12500000 $experiment
-
-done;
-
-
-for threadCount in $( seq 4 $numThreads ); do
+for threadCount in $( seq 2 $numThreads ); do
 	if [ $((threadCount%2)) == 0 -a $threadCount != 6 ];
 	#if [ $threadCount != 6 ];
 	then
