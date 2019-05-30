@@ -7,14 +7,14 @@ maxSize = 12500000
 methodNames = ["openmp", "regular openmp", "MPI", "MPI Regular"]
 
 values = {"sequential":{"sizeVtime":([],[])},
-                                "openmp" : {"threadsVspeedup":([],[]), "sizeVspeedup":([],[])},
-                                "regular openmp" :{"threadsVspeedup":([],[]), "sizeVspeedup":([],[])},
-                                "MPI":{"threadsVspeedup":([],[]), "sizeVspeedup":([],[])},
-                                "MPI Regular" : {"threadsVspeedup":([],[]), "sizeVspeedup":([],[])}}
+                                "openmp" : {"threadsVspeedup":([],[]), "sizeVspeedup":([],[]), "nodesVspeedup":([],[])},
+                                "regular openmp" :{"threadsVspeedup":([],[]), "sizeVspeedup":([],[]), "nodesVspeedup":([],[])},
+                                "MPI":{"threadsVspeedup":([],[]), "sizeVspeedup":([],[]), "nodesVspeedup":([],[])},
+                                "MPI Regular" : {"threadsVspeedup":([],[]), "sizeVspeedup":([],[]), "nodesVspeedup":([],[])}}
 
 #{"openmp" : {"threadsVspeedup":([threads],[speedup]), "sizeVspeedup":([sizes],[speedup])}}
 
-def addDataPoint(methodName, threads, size, time):
+def addDataPoint(methodName, threads, size, nodes, time):
     print("adding data point:",methodName,threads,size,time)
     if("seq" in methodName):
         sizes, times = values[methodName]["sizeVtime"]
@@ -26,31 +26,37 @@ def addDataPoint(methodName, threads, size, time):
         seqTime = seqTimes[index]
         speedUp = seqTime/time
 
-        if(threads == maxThreads):
+        if(threads == maxThreads and nodes == nodeCrossSection):
             sizes,speedUps = values[methodName]["sizeVspeedup"]
             sizes.append(size)
             speedUps.append(speedUp)
-        if(size == maxSize):
+        if(size == maxSize and nodes == nodeCrossSection):
             threadsArr, speedUps = values[methodName]["threadsVspeedup"]
             threadsArr.append(threads)
             speedUps.append(speedUp)
+
+        if (size == maxSize and threads == maxThreads ):
+            nodesArr, speedUps = values[methodName]["nodesVspeedup"]
+            nodesArr.append(nodes)
+            speedUps.append(speedUp)
+
+
     pass
 
-def readResults():
-    f = open('results'+nodeCrossSection+'.txt','r')
+def readResults(nodeNum):
+    f = open('results'+str(nodeNum)+'.txt','r')
 
     methodName = ""
     threads = 0
     size = 0
+    nodes = 0
 
     sum =0
     count =0
 
     for l in f:
         if(l.__contains__("experiment")):
-            addDataPoint(methodName, threads, size, (sum / count))
-            sum = 0
-            count = 0
+            addDataPoint(methodName, threads, size,nodes, (sum / count))
             break
 
         line = l.replace("\n","")
@@ -60,7 +66,7 @@ def readResults():
 
         if(line[0] == '*'):
             if(len(methodName)>0 and sum > 0):
-                addDataPoint(methodName,threads,size,(sum/count))
+                addDataPoint(methodName,threads,size,nodes,(sum/count))
                 sum =0
                 count =0
             methodName = line[1:]
@@ -69,13 +75,14 @@ def readResults():
 
         if(line[0] == '#'):
             if (len(methodName) > 0):
-                addDataPoint(methodName, threads, size, (sum / count))
+                addDataPoint(methodName, threads, size,nodes, (sum / count))
                 sum = 0
                 count = 0
-
+            print(line)
             threads = int(line.split(',')[1])
             size = int(line[1:].split(',')[0])
-            #print(line)
+            nodes = int(line.split(',')[2])
+            #
             continue
 
         ##########value########
@@ -99,7 +106,7 @@ def plotResults(type):
 
         vals, speedUps = values[method][type + "Vspeedup"]
         plt.plot(vals,speedUps, (colour + shape), label = method)
-        plt.legend(loc='upper left')
+        plt.legend(loc=(0.98, 0.5))
 
     if('size' in type):
         plt.xscale('log')
@@ -107,10 +114,13 @@ def plotResults(type):
     plt.ylabel("speed up")
     plt.show()
 
-readResults()
-plotResults("sequential")
-plotResults("threads")
-plotResults("size")
+for i in range(1,4):
+    readResults(i)
+
+#plotResults("sequential")
+#plotResults("threads")
+#plotResults("size")
+plotResults("nodes")
 
 
 

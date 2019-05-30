@@ -1,5 +1,4 @@
 #12500000,8,2
-Using Parallel. threads=8
 *openmp
 4.120653
 *regular openmp
